@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<VBox prefHeight="303.0" prefWidth="650.0" styleClass="background" xmlns="http://javafx.com/javafx/16"
+	  xmlns:fx="http://javafx.com/fxml/1" fx:controller="tk.thesuperlab.zapit.popups.AboutPopup">
+	<padding>
+		<Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+	</padding>
+	<BorderPane prefHeight="383.0" prefWidth="547.0" VBox.vgrow="ALWAYS">
+		<bottom>
+			<HBox spacing="8.0" BorderPane.alignment="CENTER">
+				<AnchorPane HBox.hgrow="ALWAYS">
+					<Label alignment="CENTER" text="© 2022 TheSuperLab. ZapIt is licensed under an MIT License."
+						   AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+						   AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+				</AnchorPane>
+				<AnchorPane>
+					<Button defaultButton="true" mnemonicParsing="false" onAction="#buttonCloseOnAction"
+							text="Close" />
+				</AnchorPane>
+			</HBox>
+		</bottom>
+		<left>
+			<ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true"
+					   BorderPane.alignment="CENTER">
+				<BorderPane.margin>
+					<Insets left="8.0" />
+				</BorderPane.margin>
+				<Image url="@icon.png" />
+			</ImageView>
+		</left>
+		<center>
+			<VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+				<BorderPane.margin>
+					<Insets left="20.0" />
+				</BorderPane.margin>
+				<HBox alignment="BASELINE_LEFT" spacing="5.0">
+					<Label text="ZapIt">
+						<font>
+							<Font size="30.0" />
+						</font>
+					</Label>
+					<Label fx:id="labelVersion" text="v1.0">
+						<font>
+							<Font size="20.0" />
+						</font>
+					</Label>
+				</HBox>
+				<Label text="An advanced MQTT client made for the modern age.">
+					<font>
+						<Font size="18.0" />
+					</font>
+				</Label>
+				<HBox alignment="BASELINE_LEFT">
+					<VBox.margin>
+						<Insets top="20.0" />
+					</VBox.margin>
+					<Label text="Created by:">
+						<font>
+							<Font size="14.0" />
+						</font>
+					</Label>
+					<Hyperlink text="chocoearly44">
+						<font>
+							<Font size="14.0" />
+						</font>
+					</Hyperlink>
+				</HBox>
+			</VBox>
+		</center>
+	</BorderPane>
+</VBox>

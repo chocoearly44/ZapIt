@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>tk.thesuperlab</groupId>
+	<artifactId>zapit</artifactId>
+	<version>1.0</version>
+	<name>ZapIt</name>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+		<!-- Custom -->
+		<dependency>
+			<groupId>org.eclipse.paho</groupId>
+			<artifactId>org.eclipse.paho.client.mqttv3</artifactId>
+			<version>1.2.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jfxtras</groupId>
+			<artifactId>jmetro</artifactId>
+			<version>11.6.15</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.controlsfx</groupId>
+			<artifactId>controlsfx</artifactId>
+			<version>11.1.1</version>
+		</dependency>
+
+		<!-- JavaFX -->
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-controls</artifactId>
+			<version>17.0.0.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-graphics</artifactId>
+			<version>17.0.0.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-fxml</artifactId>
+			<version>17.0.0.1</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<source>17</source>
+					<target>17</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.openjfx</groupId>
+				<artifactId>javafx-maven-plugin</artifactId>
+				<version>0.0.8</version>
+				<executions>
+					<execution>
+						<id>default-cli</id>
+						<configuration>
+							<mainClass>tk.thesuperlab.zapit/tk.thesuperlab.zapit.Launcher</mainClass>
+							<launcher>app</launcher>
+							<jlinkZipName>app</jlinkZipName>
+							<jlinkImageName>app</jlinkImageName>
+							<noManPages>true</noManPages>
+							<stripDebug>true</stripDebug>
+							<noHeaderFiles>true</noHeaderFiles>
+							<executable>${java.home}/bin/java</executable>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>io.github.fvarrui</groupId>
+				<artifactId>javapackager</artifactId>
+				<version>1.6.2</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>package</goal>
+						</goals>
+						<configuration>
+							<mainClass>tk.thesuperlab.zapit.Launcher</mainClass>
+
+							<displayName>ZapIt</displayName>
+							<name>zapit</name>
+							<envPath>zapit</envPath>
+							<description>An advanced MQTT client made for the modern age.</description>
+							<url>https://github.com/chocoearly44/ZapIt</url>
+
+							<organizationName>chocoearly44</organizationName>
+							<organizationUrl>https://thesuperlab.tk</organizationUrl>
+							<organizationEmail>chocoearly44@gmail.com</organizationEmail>
+
+							<jrePath>${java.home}</jrePath>
+							<bundleJre>true</bundleJre>
+							<copyDependencies>true</copyDependencies>
+
+							<linuxConfig>
+								<generateDeb>true</generateDeb>
+								<generateRpm>true</generateRpm>
+								<wrapJar>true</wrapJar>
+							</linuxConfig>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>
