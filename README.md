@@ -17,9 +17,9 @@
 </div>
 
 ## Documentation
-Please refer to the [Wiki Section](https://github.com/chocoearly44/bsoverlay-vscode/issues).
+Please refer to the [Wiki Section][wiki-url].
 
-## Installing
+## Installation
 ![][linux-shield]
 ![][windows-shield]
 ![][macos-shield]
