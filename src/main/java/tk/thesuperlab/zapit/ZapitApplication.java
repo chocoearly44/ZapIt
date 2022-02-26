@@ -22,8 +22,6 @@ public class ZapitApplication extends Application {
 	public static StorageUtils storageUtils;
 	public static Workspace workspace;
 
-	private Stage stage;
-
 	@Override
 	public void start(Stage stage) throws IOException {
 		// Initialise filesystem

@@ -58,20 +58,6 @@ public class ZapitController {
 	@FXML
 	private Accordion accordionSubs;
 
-	//TODO: multiple workspaces
-
-	/*@FXML
-	private MenuItem menuNewWorkspace;
-
-	@FXML
-	private MenuItem menuOpenWorkspace;
-
-	@FXML
-	private MenuItem menuSaveWorkspace;
-
-	@FXML
-	private MenuItem menuSaveWorkspaceAs;*/
-
 	@FXML
 	public void initialize() {
 		refreshConnections();
@@ -149,6 +135,23 @@ public class ZapitController {
 				refreshConnections();
 			}
 		}
+	}
+
+	@FXML
+	public void menuPreferencesOnAction() throws IOException {
+		FXMLLoader aboutLoader = new FXMLLoader(getClass().getResource("settings-popup.fxml"));
+		Parent aboutScene = aboutLoader.load();
+
+		Stage aboutStage = new Stage();
+		aboutStage.initModality(Modality.APPLICATION_MODAL);
+		aboutStage.setTitle("ZapIt settings");
+		aboutStage.getIcons().add(new Image(ZapitController.class.getResourceAsStream("icon.png")));
+		aboutStage.setScene(new Scene(aboutScene));
+
+		JMetro jMetroAbout = new JMetro(Style.DARK);
+		jMetroAbout.setParent(aboutScene);
+
+		aboutStage.show();
 	}
 
 	@FXML

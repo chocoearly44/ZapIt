@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<VBox prefHeight="303.0" prefWidth="650.0" styleClass="background" xmlns="http://javafx.com/javafx/16"
-	  xmlns:fx="http://javafx.com/fxml/1" fx:controller="tk.thesuperlab.zapit.popups.AboutPopup">
+
+<VBox prefHeight="303.0" prefWidth="650.0" styleClass="background" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tk.thesuperlab.zapit.popups.AboutPopup">
 	<padding>
 		<Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
 	</padding>
@@ -15,19 +14,15 @@
 		<bottom>
 			<HBox spacing="8.0" BorderPane.alignment="CENTER">
 				<AnchorPane HBox.hgrow="ALWAYS">
-					<Label alignment="CENTER" text="© 2022 TheSuperLab. ZapIt is licensed under an MIT License."
-						   AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-						   AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+					<Label alignment="CENTER" text="© 2022 TheSuperLab. ZapIt is licensed under an MIT License." AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
 				</AnchorPane>
 				<AnchorPane>
-					<Button defaultButton="true" mnemonicParsing="false" onAction="#buttonCloseOnAction"
-							text="Close" />
+					<Button defaultButton="true" mnemonicParsing="false" onAction="#buttonCloseOnAction" text="Close" />
 				</AnchorPane>
 			</HBox>
 		</bottom>
 		<left>
-			<ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true"
-					   BorderPane.alignment="CENTER">
+			<ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
 				<BorderPane.margin>
 					<Insets left="8.0" />
 				</BorderPane.margin>
@@ -45,7 +40,7 @@
 							<Font size="30.0" />
 						</font>
 					</Label>
-					<Label fx:id="labelVersion" text="v1.0">
+					<Label fx:id="labelVersion" text="v2.0">
 						<font>
 							<Font size="20.0" />
 						</font>
