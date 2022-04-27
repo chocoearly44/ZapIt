@@ -44,12 +44,10 @@ Don't forget to give the project a star! Thanks again!
 5. Open a Pull Request
 
 ## Bug reporting
-If you encounter any bugs while using the tools please report them in the [Issues Section][issues-url] on GitHub Repository.
+If you encounter any bugs while using ZapIt please report them in the [Issues Section][issues-url] on GitHub Repository.
 
 ## Support
-You can receive additional support in an official Discord Server or in a [Discussions Section][discussions-url] here on GitHub.
-
-[![Widget for the TSL Support guild](https://discord.com/api/guilds/807666401300316160/widget.png?style=banner1)](https://discord.gg/Wa24skGscR)
+You can receive additional support in a [Discussions Section][discussions-url] here on GitHub.
 
 [contributors-shield]: https://img.shields.io/github/contributors/chocoearly44/ZapIt.svg?style=for-the-badge
 [forks-shield]: https://img.shields.io/github/forks/chocoearly44/ZapIt.svg?style=for-the-badge
