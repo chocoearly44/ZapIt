@@ -12,6 +12,7 @@ import jfxtras.styles.jmetro.Style;
 import tk.thesuperlab.zapit.entities.Config;
 import tk.thesuperlab.zapit.entities.Workspace;
 import tk.thesuperlab.zapit.utils.StorageUtils;
+import tk.thesuperlab.zapit.utils.filesystem.UnixStorage;
 import tk.thesuperlab.zapit.utils.filesystem.WindowsStorage;
 
 import java.io.IOException;
@@ -29,7 +30,7 @@ public class ZapitApplication extends Application {
 		if(osName.startsWith("win")) {
 			storageUtils = new WindowsStorage();
 		} else if(osName.startsWith("linux")) {
-			//storageUtils = new UnixStorage();
+			storageUtils = new UnixStorage();
 		}
 
 		storageUtils.initialise();
@@ -45,7 +46,13 @@ public class ZapitApplication extends Application {
 		stage.getIcons().add(new Image(ZapitController.class.getResourceAsStream("icon.png")));
 		stage.setScene(scene);
 
-		JMetro jMetro = new JMetro(Style.DARK);
+		JMetro jMetro;
+		if(config.isDarkMode()) {
+			jMetro = new JMetro(Style.DARK);
+		} else {
+			jMetro = new JMetro(Style.LIGHT);
+		}
+
 		jMetro.setScene(scene);
 
 		ZapitController controller = fxmlLoader.getController();

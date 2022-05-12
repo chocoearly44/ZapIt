@@ -28,8 +28,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static tk.thesuperlab.zapit.ZapitApplication.storageUtils;
-import static tk.thesuperlab.zapit.ZapitApplication.workspace;
+import static tk.thesuperlab.zapit.ZapitApplication.*;
 
 public class ZapitController {
 	private IMqttClient mqttClient;
@@ -148,8 +147,14 @@ public class ZapitController {
 		aboutStage.getIcons().add(new Image(ZapitController.class.getResourceAsStream("icon.png")));
 		aboutStage.setScene(new Scene(aboutScene));
 
-		JMetro jMetroAbout = new JMetro(Style.DARK);
-		jMetroAbout.setParent(aboutScene);
+		JMetro jMetroSettings;
+		if(config.isDarkMode()) {
+			jMetroSettings = new JMetro(Style.DARK);
+		} else {
+			jMetroSettings = new JMetro(Style.LIGHT);
+		}
+
+		jMetroSettings.setParent(aboutScene);
 
 		aboutStage.show();
 	}
@@ -173,7 +178,13 @@ public class ZapitController {
 		aboutStage.getIcons().add(new Image(ZapitController.class.getResourceAsStream("icon.png")));
 		aboutStage.setScene(new Scene(aboutScene));
 
-		JMetro jMetroAbout = new JMetro(Style.DARK);
+		JMetro jMetroAbout;
+		if(config.isDarkMode()) {
+			jMetroAbout = new JMetro(Style.DARK);
+		} else {
+			jMetroAbout = new JMetro(Style.LIGHT);
+		}
+
 		jMetroAbout.setParent(aboutScene);
 
 		aboutStage.show();

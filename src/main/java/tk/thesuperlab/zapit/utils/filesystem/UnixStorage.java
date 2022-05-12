@@ -5,17 +5,43 @@ import tk.thesuperlab.zapit.entities.Connection;
 import tk.thesuperlab.zapit.entities.Workspace;
 import tk.thesuperlab.zapit.utils.StorageUtils;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.ArrayList;
 
-public class UnixStorage /*implements StorageUtils*/ {
-	/*@Override
+public class UnixStorage implements StorageUtils {
+	@Override
 	public void initialise() {
+		// Setup ZapIt folder
 		File storageFolder = getStorageFolder();
 		storageFolder.mkdir();
+
+		// Initialize files
+		File workspace = new File(getStorageFolder() + "/default.zwp");
+		File config = new File(getStorageFolder() + "/config.zcf");
+
+		if(!config.exists()) {
+			try {
+				workspace.createNewFile();
+				config.createNewFile();
+
+				FileOutputStream fos;
+				ObjectOutputStream oos;
+
+				// Setup default workspace
+				Workspace defaultWorkspace = new Workspace(new ArrayList<Connection>());
+				fos = new FileOutputStream(workspace);
+				oos = new ObjectOutputStream(fos);
+				oos.writeObject(defaultWorkspace);
+
+				// Setup default config
+				Config defaultConfig = new Config(getStorageFolder() + "/default.zwp", false);
+				fos = new FileOutputStream(config);
+				oos = new ObjectOutputStream(fos);
+				oos.writeObject(defaultConfig);
+			} catch(IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	@Override
@@ -24,30 +50,22 @@ public class UnixStorage /*implements StorageUtils*/ {
 	}
 
 	@Override
-	public File setupFiles() {
-		File workspace = new File(getStorageFolder() + "/default.zwp");
+	public Workspace getWorkspace() {
+		try {
+			FileInputStream fis = new FileInputStream(getConfig().getWorkspacePath());
+			ObjectInputStream ois = new ObjectInputStream(fis);
 
-		if(!workspace.exists()) {
-			try {
-				workspace.createNewFile();
-				Workspace defaultWorkspace = new Workspace(new ArrayList<Connection>());
-
-				FileOutputStream fout = new FileOutputStream(workspace);
-				ObjectOutputStream oos = new ObjectOutputStream(fout);
-
-				oos.writeObject(defaultWorkspace);
-			} catch(IOException e) {
-				e.printStackTrace();
-			}
+			return (Workspace) ois.readObject();
+		} catch(IOException | ClassNotFoundException e) {
+			e.printStackTrace();
+			return null;
 		}
-
-		return workspace;
 	}
 
 	@Override
 	public void saveWorkspace(Workspace workspace) {
 		try {
-			FileOutputStream fout = new FileOutputStream(getStorageFolder() + "/default.zwp");
+			FileOutputStream fout = new FileOutputStream(getConfig().getWorkspacePath());
 			ObjectOutputStream oos = new ObjectOutputStream(fout);
 
 			oos.writeObject(workspace);
@@ -58,11 +76,26 @@ public class UnixStorage /*implements StorageUtils*/ {
 
 	@Override
 	public Config getConfig() {
-		return null;
+		try {
+			FileInputStream fis = new FileInputStream(getStorageFolder() + "/config.zcf");
+			ObjectInputStream ois = new ObjectInputStream(fis);
+
+			return (Config) ois.readObject();
+		} catch(IOException | ClassNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
 	public void saveConfig(Config config) {
+		try {
+			FileOutputStream fout = new FileOutputStream(getStorageFolder() + "/config.zcf");
+			ObjectOutputStream oos = new ObjectOutputStream(fout);
 
-	}*/
+			oos.writeObject(config);
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
