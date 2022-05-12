@@ -1,5 +1,6 @@
 package tk.thesuperlab.zapit.utils.filesystem;
 
+import tk.thesuperlab.zapit.entities.Config;
 import tk.thesuperlab.zapit.entities.Connection;
 import tk.thesuperlab.zapit.entities.Workspace;
 import tk.thesuperlab.zapit.utils.StorageUtils;
@@ -10,8 +11,8 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-public class UnixStorage implements StorageUtils {
-	@Override
+public class UnixStorage /*implements StorageUtils*/ {
+	/*@Override
 	public void initialise() {
 		File storageFolder = getStorageFolder();
 		storageFolder.mkdir();
@@ -23,7 +24,7 @@ public class UnixStorage implements StorageUtils {
 	}
 
 	@Override
-	public File createDefaultWorkspace() {
+	public File setupFiles() {
 		File workspace = new File(getStorageFolder() + "/default.zwp");
 
 		if(!workspace.exists()) {
@@ -54,4 +55,14 @@ public class UnixStorage implements StorageUtils {
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	public Config getConfig() {
+		return null;
+	}
+
+	@Override
+	public void saveConfig(Config config) {
+
+	}*/
 }
