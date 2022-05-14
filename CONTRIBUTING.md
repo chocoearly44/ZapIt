@@ -1,6 +1,6 @@
 ## Contributing
 ### Requirements
-- [Liberica Full JDK and JRE](https://bell-sw.com/pages/downloads)
+- [JDK 17](https://www.oracle.com/java/technologies/downloads)
 - [Apache Maven](https://maven.apache.org)
 
 If you have a suggestion that would make this better, please fork the repo and create a pull request.
