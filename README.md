@@ -24,10 +24,19 @@ Please refer to the [Wiki Section][wiki-url].
 ![][windows-shield]
 ![][macos-shield]
 
-Go to the [Releases section][releases-url] and download the latest release.
-
 ### Requirements
-- [Liberica Full JRE](https://bell-sw.com/pages/downloads) (not needed if you're using an installer)
+- [Java 17](https://www.oracle.com/java/technologies/downloads/) or newer
+
+### Linux
+#### Debian or Ubuntu
+Download DEB file from the [releases][releases-url]
+### Arch or Manjaro
+Open terminal and run `yay -S zapit`
+### Fedora (untested)
+Download RPM file from the [releases][releases-url]
+
+### Windows
+Download installer from the [releases][releases-url]
 
 ## Bug reporting
 If you encounter any bugs while using ZapIt please report them in the [Issues Section][issues-url] on GitHub Repository.
