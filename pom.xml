@@ -89,10 +89,10 @@
 					<dest>${project.build.directory}/jpackage</dest>
 					<type>IMAGE</type>
 
-					<name>zapit</name>
+					<name>ZapIt</name>
 					<appversion>${version}</appversion>
 					<copyright>Copyright (c) 2022 chocoearly44</copyright>
-					<description>Description</description>
+					<description>An advanced MQTT client made for the modern age.</description>
 					<vendor>chocoearly44</vendor>
 
 					<icon>${project.basedir}/assets/icon.ico</icon>
