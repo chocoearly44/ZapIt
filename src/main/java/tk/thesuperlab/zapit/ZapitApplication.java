@@ -22,6 +22,10 @@ public class ZapitApplication extends Application {
 	public static Workspace workspace;
 	public static Config config;
 
+	public static void main(String[] args) {
+		launch();
+	}
+
 	@Override
 	public void start(Stage stage) throws IOException {
 		// Initialise filesystem
@@ -64,9 +68,5 @@ public class ZapitApplication extends Application {
 				controller.stopMqtt();
 			}
 		});
-	}
-
-	public static void main(String[] args) {
-		launch();
 	}
 }

@@ -2,11 +2,12 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.input.*?>
+<?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-
-<VBox alignment="TOP_CENTER" prefHeight="595.0" prefWidth="846.0" styleClass="background" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tk.thesuperlab.zapit.ZapitController">
+<?import javafx.scene.text.Font?>
+<VBox alignment="TOP_CENTER" prefHeight="595.0" prefWidth="846.0" styleClass="background"
+	  xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
+	  fx:controller="tk.thesuperlab.zapit.ZapitController">
 	<MenuBar>
 		<Menu mnemonicParsing="false" text="File">
 			<MenuItem mnemonicParsing="false" onAction="#menuPreferencesOnAction" text="Settings">
@@ -34,7 +35,8 @@
 			<VBox BorderPane.alignment="CENTER">
 				<HBox alignment="CENTER" VBox.vgrow="NEVER">
 					<AnchorPane HBox.hgrow="ALWAYS">
-						<Label text="Connections" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+						<Label text="Connections" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0"
+							   AnchorPane.topAnchor="0.0">
 							<font>
 								<Font size="18.0" />
 							</font>
@@ -50,7 +52,8 @@
 						<opaqueInsets>
 							<Insets />
 						</opaqueInsets>
-						<Button mnemonicParsing="false" onAction="#buttonAddServerOnAction" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+						<Button mnemonicParsing="false" onAction="#buttonAddServerOnAction" text="Add"
+								AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
 					</AnchorPane>
 					<AnchorPane HBox.hgrow="ALWAYS">
 						<padding>
@@ -59,7 +62,9 @@
 						<opaqueInsets>
 							<Insets />
 						</opaqueInsets>
-						<Button defaultButton="true" mnemonicParsing="false" onAction="#buttonConnectOnAction" text="Connect" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+						<Button defaultButton="true" mnemonicParsing="false" onAction="#buttonConnectOnAction"
+								text="Connect" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0"
+								AnchorPane.topAnchor="0.0" />
 					</AnchorPane>
 				</HBox>
 
@@ -102,13 +107,18 @@
 							<padding>
 								<Insets right="8.0" />
 							</padding>
-							<TextField fx:id="fieldSendTopic" disable="true" promptText="Enter topic" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+							<TextField fx:id="fieldSendTopic" disable="true" promptText="Enter topic"
+									   AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+									   AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
 						</AnchorPane>
 						<AnchorPane>
-							<Button fx:id="buttonSend" defaultButton="true" disable="true" mnemonicParsing="false" onAction="#buttonSendOnAction" text="Publish" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+							<Button fx:id="buttonSend" defaultButton="true" disable="true" mnemonicParsing="false"
+									onAction="#buttonSendOnAction" text="Publish" AnchorPane.bottomAnchor="0.0"
+									AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
 						</AnchorPane>
 					</HBox>
-					<TextArea fx:id="areaMessage" disable="true" prefHeight="200.0" prefWidth="200.0" promptText="Enter message" wrapText="true">
+					<TextArea fx:id="areaMessage" disable="true" prefHeight="200.0" prefWidth="200.0"
+							  promptText="Enter message" wrapText="true">
 						<VBox.margin>
 							<Insets top="8.0" />
 						</VBox.margin>
@@ -131,10 +141,14 @@
 							<padding>
 								<Insets right="8.0" />
 							</padding>
-							<TextField fx:id="fieldReceiveTopic" disable="true" promptText="Enter topic" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+							<TextField fx:id="fieldReceiveTopic" disable="true" promptText="Enter topic"
+									   AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+									   AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
 						</AnchorPane>
 						<AnchorPane>
-							<Button fx:id="buttonSubscribe" defaultButton="true" disable="true" mnemonicParsing="false" onAction="#buttonSubscribeOnAction" text="Subscribe" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+							<Button fx:id="buttonSubscribe" defaultButton="true" disable="true" mnemonicParsing="false"
+									onAction="#buttonSubscribeOnAction" text="Subscribe" AnchorPane.bottomAnchor="0.0"
+									AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
 						</AnchorPane>
 					</HBox>
 					<Accordion fx:id="accordionSubs" VBox.vgrow="ALWAYS">
