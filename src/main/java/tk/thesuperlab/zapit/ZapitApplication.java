@@ -9,45 +9,39 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
+import tk.thesuperlab.zapit.entities.Config;
 import tk.thesuperlab.zapit.entities.Workspace;
 import tk.thesuperlab.zapit.utils.StorageUtils;
 import tk.thesuperlab.zapit.utils.filesystem.UnixStorage;
+import tk.thesuperlab.zapit.utils.filesystem.WindowsStorage;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 
 public class ZapitApplication extends Application {
 	public static StorageUtils storageUtils;
 	public static Workspace workspace;
+	public static Config config;
 
-	private Stage stage;
+	public static void main(String[] args) {
+		launch();
+	}
 
 	@Override
 	public void start(Stage stage) throws IOException {
 		// Initialise filesystem
-		switch(System.getProperty("os.name").toLowerCase()) {
-			case "windows":
-				//TODO: Windows support
-				break;
-			case "linux":
-				storageUtils = new UnixStorage();
-				break;
+		String osName = System.getProperty("os.name").toLowerCase();
+
+		if(osName.startsWith("win")) {
+			storageUtils = new WindowsStorage();
+		} else if(osName.startsWith("linux")) {
+			storageUtils = new UnixStorage();
 		}
 
 		storageUtils.initialise();
 
-		// Read default workspace
-		File defaultWorkspace = storageUtils.createDefaultWorkspace();
-
-		try {
-			FileInputStream fis = new FileInputStream(defaultWorkspace);
-			ObjectInputStream ois = new ObjectInputStream(fis);
-			workspace = (Workspace) ois.readObject();
-		} catch(IOException | ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+		// Load files
+		config = storageUtils.getConfig();
+		workspace = storageUtils.getWorkspace();
 
 		// Setup JavaFX
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("zapit-view.fxml"));
@@ -56,7 +50,13 @@ public class ZapitApplication extends Application {
 		stage.getIcons().add(new Image(ZapitController.class.getResourceAsStream("icon.png")));
 		stage.setScene(scene);
 
-		JMetro jMetro = new JMetro(Style.DARK);
+		JMetro jMetro;
+		if(config.isDarkMode()) {
+			jMetro = new JMetro(Style.DARK);
+		} else {
+			jMetro = new JMetro(Style.LIGHT);
+		}
+
 		jMetro.setScene(scene);
 
 		ZapitController controller = fxmlLoader.getController();
@@ -68,9 +68,5 @@ public class ZapitApplication extends Application {
 				controller.stopMqtt();
 			}
 		});
-	}
-
-	public static void main(String[] args) {
-		launch();
 	}
 }

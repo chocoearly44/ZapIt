@@ -10,32 +10,12 @@
 	  fx:controller="tk.thesuperlab.zapit.ZapitController">
 	<MenuBar>
 		<Menu mnemonicParsing="false" text="File">
-			<!--<MenuItem fx:id="menuNewWorkspace" mnemonicParsing="false" text="New Workspace">
-						<accelerator>
-							<KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP"
-												shortcut="UP" />
-						</accelerator>
-					</MenuItem>
-					<SeparatorMenuItem mnemonicParsing="false" />
-					<MenuItem fx:id="menuOpenWorkspace" mnemonicParsing="false" text="Open Workspace">
-						<accelerator>
-							<KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP"
-												shortcut="UP" />
-						</accelerator>
-					</MenuItem>
-					<MenuItem fx:id="menuSaveWorkspace" mnemonicParsing="false" text="Save Workspace">
-						<accelerator>
-							<KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP"
-												shortcut="UP" />
-						</accelerator>
-					</MenuItem>
-					<MenuItem fx:id="menuSaveWorkspaceAs" mnemonicParsing="false" text="Save Workspace As">
-						<accelerator>
-							<KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="DOWN"
-												shortcut="UP" />
-						</accelerator>
-					</MenuItem>
-					<SeparatorMenuItem mnemonicParsing="false" />-->
+			<MenuItem mnemonicParsing="false" onAction="#menuPreferencesOnAction" text="Settings">
+				<accelerator>
+					<KeyCodeCombination alt="DOWN" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+				</accelerator>
+			</MenuItem>
+			<SeparatorMenuItem mnemonicParsing="false" />
 			<MenuItem mnemonicParsing="false" onAction="#menuExitOnAction" text="Exit">
 				<accelerator>
 					<KeyCodeCombination alt="UP" code="Q" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
@@ -73,8 +53,7 @@
 							<Insets />
 						</opaqueInsets>
 						<Button mnemonicParsing="false" onAction="#buttonAddServerOnAction" text="Add"
-								AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0"
-								AnchorPane.topAnchor="0.0" />
+								AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
 					</AnchorPane>
 					<AnchorPane HBox.hgrow="ALWAYS">
 						<padding>

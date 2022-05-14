@@ -28,49 +28,27 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static tk.thesuperlab.zapit.ZapitApplication.storageUtils;
-import static tk.thesuperlab.zapit.ZapitApplication.workspace;
+import static tk.thesuperlab.zapit.ZapitApplication.*;
 
 public class ZapitController {
 	private IMqttClient mqttClient;
 
 	@FXML
 	private ListView<String> listConnections;
-
 	@FXML
 	private Label labelName;
-
 	@FXML
 	private TextField fieldSendTopic;
-
 	@FXML
 	private Button buttonSend;
-
 	@FXML
 	private TextArea areaMessage;
-
 	@FXML
 	private Button buttonSubscribe;
-
 	@FXML
 	private TextField fieldReceiveTopic;
-
 	@FXML
 	private Accordion accordionSubs;
-
-	//TODO: multiple workspaces
-
-	/*@FXML
-	private MenuItem menuNewWorkspace;
-
-	@FXML
-	private MenuItem menuOpenWorkspace;
-
-	@FXML
-	private MenuItem menuSaveWorkspace;
-
-	@FXML
-	private MenuItem menuSaveWorkspaceAs;*/
 
 	@FXML
 	public void initialize() {
@@ -93,8 +71,14 @@ public class ZapitController {
 		stage.getIcons().add(new Image(ZapitController.class.getResourceAsStream("icon.png")));
 		stage.setScene(new Scene(scene));
 
-		JMetro jMetro = new JMetro(Style.DARK);
-		jMetro.setParent(scene);
+		JMetro jMetroConnection;
+		if(config.isDarkMode()) {
+			jMetroConnection = new JMetro(Style.DARK);
+		} else {
+			jMetroConnection = new JMetro(Style.LIGHT);
+		}
+
+		jMetroConnection.setParent(scene);
 
 		ConnectionPopup connectionPopup = fxmlLoader.getController();
 		connectionPopup.init(this);
@@ -152,6 +136,29 @@ public class ZapitController {
 	}
 
 	@FXML
+	public void menuPreferencesOnAction() throws IOException {
+		FXMLLoader aboutLoader = new FXMLLoader(getClass().getResource("settings-popup.fxml"));
+		Parent aboutScene = aboutLoader.load();
+
+		Stage aboutStage = new Stage();
+		aboutStage.initModality(Modality.APPLICATION_MODAL);
+		aboutStage.setTitle("ZapIt settings");
+		aboutStage.getIcons().add(new Image(ZapitController.class.getResourceAsStream("icon.png")));
+		aboutStage.setScene(new Scene(aboutScene));
+
+		JMetro jMetroSettings;
+		if(config.isDarkMode()) {
+			jMetroSettings = new JMetro(Style.DARK);
+		} else {
+			jMetroSettings = new JMetro(Style.LIGHT);
+		}
+
+		jMetroSettings.setParent(aboutScene);
+
+		aboutStage.show();
+	}
+
+	@FXML
 	public void menuExitOnAction() {
 		stopMqtt();
 
@@ -170,7 +177,13 @@ public class ZapitController {
 		aboutStage.getIcons().add(new Image(ZapitController.class.getResourceAsStream("icon.png")));
 		aboutStage.setScene(new Scene(aboutScene));
 
-		JMetro jMetroAbout = new JMetro(Style.DARK);
+		JMetro jMetroAbout;
+		if(config.isDarkMode()) {
+			jMetroAbout = new JMetro(Style.DARK);
+		} else {
+			jMetroAbout = new JMetro(Style.LIGHT);
+		}
+
 		jMetroAbout.setParent(aboutScene);
 
 		aboutStage.show();

@@ -1,5 +1,5 @@
 <p align="center">
-    <img align="center" src="assets/linux/zapit.png" height="150px">
+    <img align="center" src="assets/icon.png" height="150px">
 </p>
 
 <h1 align="center">ZapIt</h1>
@@ -24,24 +24,19 @@ Please refer to the [Wiki Section][wiki-url].
 ![][windows-shield]
 ![][macos-shield]
 
-Go to the [Releases section][releases-url] and download the latest release.
-
 ### Requirements
-- [Liberica Full JRE](https://bell-sw.com/pages/downloads) (not needed if you're using an installer)
+- [Java 17](https://www.oracle.com/java/technologies/downloads/) or newer
 
-## Contributing
-### Requirements
-- [Liberica Full JDK and JRE](https://bell-sw.com/pages/downloads)
-- [Apache Maven](https://maven.apache.org)
+### Linux
+#### Debian or Ubuntu
+Download DEB file from the [releases][releases-url]
+### Arch or Manjaro
+Open terminal and run `yay -S zapit`
+### Fedora (untested)
+Download RPM file from the [releases][releases-url]
 
-If you have a suggestion that would make this better, please fork the repo and create a pull request.
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Added some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+### Windows
+Download installer from the [releases][releases-url]
 
 ## Bug reporting
 If you encounter any bugs while using ZapIt please report them in the [Issues Section][issues-url] on GitHub Repository.
@@ -56,7 +51,7 @@ You can receive additional support in a [Discussions Section][discussions-url] h
 [license-shield]: https://img.shields.io/github/license/chocoearly44/ZapIt.svg?style=for-the-badge
 
 [linux-shield]: https://img.shields.io/badge/Linux-Yes-green?style=for-the-badge&logo=linux
-[windows-shield]: https://img.shields.io/badge/Windows-Not%20yet-red?style=for-the-badge&logo=windows
+[windows-shield]: https://img.shields.io/badge/Windows-Yes-green?style=for-the-badge&logo=windows
 [macos-shield]: https://img.shields.io/badge/MacOs-Not%20yet-red?style=for-the-badge&logo=apple
 
 [contributors-url]: https://github.com/chocoearly44/ZapIt/graphs/contributors

@@ -8,7 +8,7 @@ import tk.thesuperlab.zapit.utils.StorageUtils;
 import java.io.*;
 import java.util.ArrayList;
 
-public class UnixStorage implements StorageUtils {
+public class WindowsStorage implements StorageUtils {
 	@Override
 	public void initialise() {
 		// Setup ZapIt folder
@@ -16,8 +16,8 @@ public class UnixStorage implements StorageUtils {
 		storageFolder.mkdir();
 
 		// Initialize files
-		File workspace = new File(getStorageFolder() + "/default.zwp");
-		File config = new File(getStorageFolder() + "/config.zcf");
+		File workspace = new File(getStorageFolder() + "\\default.zwp");
+		File config = new File(getStorageFolder() + "\\config.zcf");
 
 		if(!config.exists()) {
 			try {
@@ -34,7 +34,7 @@ public class UnixStorage implements StorageUtils {
 				oos.writeObject(defaultWorkspace);
 
 				// Setup default config
-				Config defaultConfig = new Config(getStorageFolder() + "/default.zwp", false);
+				Config defaultConfig = new Config(getStorageFolder() + "\\default.zwp", false);
 				fos = new FileOutputStream(config);
 				oos = new ObjectOutputStream(fos);
 				oos.writeObject(defaultConfig);
@@ -46,7 +46,7 @@ public class UnixStorage implements StorageUtils {
 
 	@Override
 	public File getStorageFolder() {
-		return new File(System.getProperty("user.home") + "/.zapit");
+		return new File(System.getProperty("user.home") + "\\.zapit");
 	}
 
 	@Override
@@ -77,7 +77,7 @@ public class UnixStorage implements StorageUtils {
 	@Override
 	public Config getConfig() {
 		try {
-			FileInputStream fis = new FileInputStream(getStorageFolder() + "/config.zcf");
+			FileInputStream fis = new FileInputStream(getStorageFolder() + "\\config.zcf");
 			ObjectInputStream ois = new ObjectInputStream(fis);
 
 			return (Config) ois.readObject();
@@ -90,7 +90,7 @@ public class UnixStorage implements StorageUtils {
 	@Override
 	public void saveConfig(Config config) {
 		try {
-			FileOutputStream fout = new FileOutputStream(getStorageFolder() + "/config.zcf");
+			FileOutputStream fout = new FileOutputStream(getStorageFolder() + "\\config.zcf");
 			ObjectOutputStream oos = new ObjectOutputStream(fout);
 
 			oos.writeObject(config);

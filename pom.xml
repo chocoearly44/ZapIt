@@ -6,7 +6,7 @@
 
 	<groupId>tk.thesuperlab</groupId>
 	<artifactId>zapit</artifactId>
-	<version>1.0</version>
+	<version>1.1</version>
 	<name>ZapIt</name>
 
 	<properties>
@@ -37,19 +37,13 @@
 		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-controls</artifactId>
-			<version>17.0.0.1</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.openjfx</groupId>
-			<artifactId>javafx-graphics</artifactId>
-			<version>17.0.0.1</version>
+			<version>17.0.1</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-fxml</artifactId>
-			<version>17.0.0.1</version>
+			<version>17.0.1</version>
 		</dependency>
 	</dependencies>
 
@@ -58,7 +52,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
+				<version>3.10.1</version>
 				<configuration>
 					<source>17</source>
 					<target>17</target>
@@ -73,54 +67,40 @@
 					<execution>
 						<id>default-cli</id>
 						<configuration>
-							<mainClass>tk.thesuperlab.zapit/tk.thesuperlab.zapit.Launcher</mainClass>
+							<mainClass>tk.thesuperlab.zapit/tk.thesuperlab.zapit.ZapitApplication</mainClass>
 							<launcher>app</launcher>
 							<jlinkZipName>app</jlinkZipName>
 							<jlinkImageName>app</jlinkImageName>
 							<noManPages>true</noManPages>
 							<stripDebug>true</stripDebug>
 							<noHeaderFiles>true</noHeaderFiles>
-							<executable>${java.home}/bin/java</executable>
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
 
 			<plugin>
-				<groupId>io.github.fvarrui</groupId>
-				<artifactId>javapackager</artifactId>
-				<version>1.6.2</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>package</goal>
-						</goals>
-						<configuration>
-							<mainClass>tk.thesuperlab.zapit.Launcher</mainClass>
+				<groupId>com.github.akman</groupId>
+				<artifactId>jpackage-maven-plugin</artifactId>
+				<version>0.1.3</version>
+				<configuration>
+					<toolhome>${env.JAVA_HOME}</toolhome>
 
-							<displayName>ZapIt</displayName>
-							<name>zapit</name>
-							<envPath>zapit</envPath>
-							<description>An advanced MQTT client made for the modern age.</description>
-							<url>https://github.com/chocoearly44/ZapIt</url>
+					<dest>${project.build.directory}/jpackage</dest>
+					<type>IMAGE</type>
 
-							<organizationName>chocoearly44</organizationName>
-							<organizationUrl>https://thesuperlab.tk</organizationUrl>
-							<organizationEmail>chocoearly44@gmail.com</organizationEmail>
+					<name>ZapIt</name>
+					<appversion>${version}</appversion>
+					<copyright>Copyright (c) 2022 chocoearly44</copyright>
+					<description>An advanced MQTT client made for the modern age.</description>
+					<vendor>chocoearly44</vendor>
 
-							<jrePath>${java.home}</jrePath>
-							<bundleJre>true</bundleJre>
-							<copyDependencies>true</copyDependencies>
+					<icon>${project.basedir}/assets/icon.ico</icon>
 
-							<linuxConfig>
-								<generateDeb>true</generateDeb>
-								<generateRpm>true</generateRpm>
-								<wrapJar>true</wrapJar>
-							</linuxConfig>
-						</configuration>
-					</execution>
-				</executions>
+					<input>${project.basedir}/out/artifacts/zapit_jar</input>
+					<mainjar>zapit.jar</mainjar>
+					<mainclass>tk.thesuperlab.zapit.Launcher</mainclass>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
