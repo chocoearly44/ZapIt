@@ -80,44 +80,6 @@
 							<noManPages>true</noManPages>
 							<stripDebug>true</stripDebug>
 							<noHeaderFiles>true</noHeaderFiles>
-							<executable>${java.home}/bin/java</executable>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>io.github.fvarrui</groupId>
-				<artifactId>javapackager</artifactId>
-				<version>1.6.2</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>package</goal>
-						</goals>
-						<configuration>
-							<mainClass>tk.thesuperlab.zapit.Launcher</mainClass>
-
-							<displayName>ZapIt</displayName>
-							<name>zapit</name>
-							<envPath>zapit</envPath>
-							<description>An advanced MQTT client made for the modern age.</description>
-							<url>https://github.com/chocoearly44/ZapIt</url>
-
-							<organizationName>chocoearly44</organizationName>
-							<organizationUrl>https://thesuperlab.tk</organizationUrl>
-							<organizationEmail>chocoearly44@gmail.com</organizationEmail>
-
-							<jrePath>${java.home}</jrePath>
-							<bundleJre>true</bundleJre>
-							<copyDependencies>true</copyDependencies>
-
-							<linuxConfig>
-								<generateDeb>true</generateDeb>
-								<generateRpm>true</generateRpm>
-								<wrapJar>true</wrapJar>
-							</linuxConfig>
 						</configuration>
 					</execution>
 				</executions>
