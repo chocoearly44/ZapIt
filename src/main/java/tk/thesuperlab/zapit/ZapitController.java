@@ -71,8 +71,14 @@ public class ZapitController {
 		stage.getIcons().add(new Image(ZapitController.class.getResourceAsStream("icon.png")));
 		stage.setScene(new Scene(scene));
 
-		JMetro jMetro = new JMetro(Style.DARK);
-		jMetro.setParent(scene);
+		JMetro jMetroConnection;
+		if(config.isDarkMode()) {
+			jMetroConnection = new JMetro(Style.DARK);
+		} else {
+			jMetroConnection = new JMetro(Style.LIGHT);
+		}
+
+		jMetroConnection.setParent(scene);
 
 		ConnectionPopup connectionPopup = fxmlLoader.getController();
 		connectionPopup.init(this);
