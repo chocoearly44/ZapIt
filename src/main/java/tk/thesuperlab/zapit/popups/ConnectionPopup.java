@@ -19,37 +19,26 @@ public class ConnectionPopup {
 
 	@FXML
 	private Button buttonAdd;
-
 	@FXML
 	private Button buttonCancel;
-
 	@FXML
 	private TextField fieldName;
-
 	@FXML
 	private ComboBox<String> comboProtocol;
-
 	@FXML
 	private TextField fieldHost;
-
 	@FXML
 	private TextField fieldPort;
-
 	@FXML
 	private ToggleSwitch switchClean;
-
 	@FXML
 	private ToggleSwitch switchReconnect;
-
 	@FXML
 	private TextField fieldAlive;
-
 	@FXML
 	private TextField fieldClientId;
-
 	@FXML
 	private TextField fieldUsername;
-
 	@FXML
 	private TextField fieldPassword;
 

@@ -15,9 +15,10 @@ import java.io.File;
 import static tk.thesuperlab.zapit.ZapitApplication.storageUtils;
 
 public class SettingsPopup {
+	private Config config;
+
 	@FXML
 	public ToggleSwitch switchDarkMode;
-	private Config config;
 	@FXML
 	private TextField fieldWorkspacePath;
 

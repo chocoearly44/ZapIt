@@ -35,25 +35,18 @@ public class ZapitController {
 
 	@FXML
 	private ListView<String> listConnections;
-
 	@FXML
 	private Label labelName;
-
 	@FXML
 	private TextField fieldSendTopic;
-
 	@FXML
 	private Button buttonSend;
-
 	@FXML
 	private TextArea areaMessage;
-
 	@FXML
 	private Button buttonSubscribe;
-
 	@FXML
 	private TextField fieldReceiveTopic;
-
 	@FXML
 	private Accordion accordionSubs;
 
