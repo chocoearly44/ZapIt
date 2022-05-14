@@ -78,6 +78,30 @@
 					</execution>
 				</executions>
 			</plugin>
+
+			<plugin>
+				<groupId>com.github.akman</groupId>
+				<artifactId>jpackage-maven-plugin</artifactId>
+				<version>0.1.3</version>
+				<configuration>
+					<toolhome>${env.JAVA_HOME}</toolhome>
+
+					<dest>${project.build.directory}/jpackage</dest>
+					<type>IMAGE</type>
+
+					<name>zapit</name>
+					<appversion>${version}</appversion>
+					<copyright>Copyright (c) 2022 chocoearly44</copyright>
+					<description>Description</description>
+					<vendor>chocoearly44</vendor>
+
+					<icon>${project.basedir}/assets/icon.ico</icon>
+
+					<input>${project.basedir}/out/artifacts/zapit_jar</input>
+					<mainjar>zapit.jar</mainjar>
+					<mainclass>tk.thesuperlab.zapit.Launcher</mainclass>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 </project>

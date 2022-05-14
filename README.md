@@ -1,5 +1,5 @@
 <p align="center">
-    <img align="center" src="./assets/linux/zapit.png" height="150px">
+    <img align="center" src="assets/icon.png" height="150px">
 </p>
 
 <h1 align="center">ZapIt</h1>
