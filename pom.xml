@@ -101,16 +101,9 @@
 					<mainjar>zapit.jar</mainjar>
 					<mainclass>tk.thesuperlab.zapit.Launcher</mainclass>
 
-					<arguments>--win-shortcut --win-menu</arguments>
-
-					<addlaunchers>
-						<addlauncher>
-							<name>zapit</name>
-							<appversion>${project.version}</appversion>
-							<icon>${project.basedir}/assets/icon.ico</icon>
-							<winconsole>true</winconsole>
-						</addlauncher>
-					</addlaunchers>
+					<winmenu>true</winmenu>
+					<winmenugroup>TheSuperLab</winmenugroup>
+					<winshortcut>true</winshortcut>
 				</configuration>
 			</plugin>
 		</plugins>
