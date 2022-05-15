@@ -87,7 +87,7 @@
 					<toolhome>${env.JAVA_HOME}</toolhome>
 
 					<dest>${project.build.directory}/jpackage</dest>
-					<type>DEB</type>
+					<type>IMAGE</type>
 
 					<name>ZapIt</name>
 					<appversion>${project.version}</appversion>
@@ -100,6 +100,17 @@
 					<input>${project.basedir}/out/artifacts/zapit_jar</input>
 					<mainjar>zapit.jar</mainjar>
 					<mainclass>tk.thesuperlab.zapit.Launcher</mainclass>
+
+					<arguments>--win-shortcut --win-menu</arguments>
+
+					<addlaunchers>
+						<addlauncher>
+							<name>zapit</name>
+							<appversion>${project.version}</appversion>
+							<icon>${project.basedir}/assets/icon.ico</icon>
+							<winconsole>true</winconsole>
+						</addlauncher>
+					</addlaunchers>
 				</configuration>
 			</plugin>
 		</plugins>
