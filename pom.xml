@@ -87,13 +87,13 @@
 					<toolhome>${env.JAVA_HOME}</toolhome>
 
 					<dest>${project.build.directory}/jpackage</dest>
-					<type>IMAGE</type>
+					<type>DEB</type>
 
 					<name>ZapIt</name>
 					<appversion>${version}</appversion>
-					<copyright>Copyright (c) 2022 chocoearly44</copyright>
+					<copyright>Copyright (c) 2022 TheSuperLab</copyright>
 					<description>An advanced MQTT client made for the modern age.</description>
-					<vendor>chocoearly44</vendor>
+					<vendor>TheSuperLab</vendor>
 
 					<icon>${project.basedir}/assets/icon.ico</icon>
 
