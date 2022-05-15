@@ -90,7 +90,7 @@
 					<type>DEB</type>
 
 					<name>ZapIt</name>
-					<appversion>${version}</appversion>
+					<appversion>${project.version}</appversion>
 					<copyright>Copyright (c) 2022 TheSuperLab</copyright>
 					<description>An advanced MQTT client made for the modern age.</description>
 					<vendor>TheSuperLab</vendor>
