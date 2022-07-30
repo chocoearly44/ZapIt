@@ -1,5 +1,5 @@
 <p align="center">
-    <img align="center" src="assets/icon.png" height="150px">
+    <img align="center" src="./assets/icon.svg" height="150px">
 </p>
 
 <h1 align="center">ZapIt</h1>
@@ -39,10 +39,10 @@ Download RPM file from the [releases][releases-url]
 Download installer from the [releases][releases-url]
 
 ## Bug reporting
-If you encounter any bugs while using ZapIt please report them in the [Issues Section][issues-url] on GitHub Repository.
+If you encounter any bugs while using ZapIt, please report them in the [Issues Section][issues-url].
 
 ## Support
-You can receive additional support in a [Discussions Section][discussions-url] here on GitHub.
+You can receive additional support in a [Discussions Section][discussions-url].
 
 [contributors-shield]: https://img.shields.io/github/contributors/chocoearly44/ZapIt.svg?style=for-the-badge
 [forks-shield]: https://img.shields.io/github/forks/chocoearly44/ZapIt.svg?style=for-the-badge
