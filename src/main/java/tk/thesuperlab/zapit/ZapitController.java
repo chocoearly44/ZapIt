@@ -306,11 +306,7 @@ public class ZapitController {
 
 	public void refreshConnections() {
 		listConnections.getItems().clear();
-
-		for(Connection connection : workspace.getConnections()) {
-			listConnections.getItems().add(connection.getName());
-		}
-
+		workspace.getConnections().forEach(connection -> listConnections.getItems().add(connection.getName()));
 		listConnections.refresh();
 	}
 
@@ -332,14 +328,16 @@ public class ZapitController {
 
 	public void stopMqtt() {
 		try {
-			if(mqttClient != null) {
-				if(mqttClient.isConnected()) {
-					mqttClient.disconnect();
-				}
-
-				accordionSubs.getPanes().clear();
-				mqttClient.close();
+			if(mqttClient == null) {
+				return;
 			}
+
+			if(mqttClient.isConnected()) {
+				mqttClient.disconnect();
+			}
+
+			accordionSubs.getPanes().clear();
+			mqttClient.close();
 		} catch(MqttException e) {
 			e.printStackTrace();
 		}

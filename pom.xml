@@ -62,9 +62,32 @@
 						<artifactId>jpackage-maven-plugin</artifactId>
 						<version>0.1.3</version>
 						<configuration combine.self="append">
+							<type>MSI</type>
+
 							<winmenu>true</winmenu>
 							<winmenugroup>TheSuperLab</winmenugroup>
 							<winshortcut>true</winshortcut>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>linux-build</id>
+			<activation>
+				<os>
+					<family>Linux</family>
+				</os>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.github.akman</groupId>
+						<artifactId>jpackage-maven-plugin</artifactId>
+						<version>0.1.3</version>
+						<configuration combine.self="append">
+							<type>IMAGE</type>
 						</configuration>
 					</plugin>
 				</plugins>
@@ -79,8 +102,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.10.1</version>
 				<configuration>
-					<source>17</source>
-					<target>17</target>
+					<source>18</source>
+					<target>18</target>
 				</configuration>
 			</plugin>
 
@@ -107,13 +130,12 @@
 					<toolhome>${env.JAVA_HOME}</toolhome>
 
 					<dest>${project.build.directory}/jpackage</dest>
-					<type>IMAGE</type>
 
 					<name>ZapIt</name>
 					<appversion>${project.version}</appversion>
-					<copyright>Copyright (c) 2022 TheSuperLab</copyright>
+					<copyright>Copyright (c) 2022 chocoearly44</copyright>
 					<description>An advanced MQTT client made for the modern age.</description>
-					<vendor>TheSuperLab</vendor>
+					<vendor>chocoearly44</vendor>
 
 					<icon>${project.basedir}/assets/icon.ico</icon>
 
