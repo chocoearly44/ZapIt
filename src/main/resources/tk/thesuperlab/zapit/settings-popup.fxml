@@ -6,7 +6,7 @@
 <?import javafx.scene.text.*?>
 <?import org.controlsfx.control.*?>
 
-<VBox prefHeight="248.0" prefWidth="563.0" styleClass="background" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tk.thesuperlab.zapit.popups.SettingsPopup">
+<VBox prefHeight="248.0" prefWidth="563.0" styleClass="background" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="tk.thesuperlab.zapit.popups.SettingsPopup">
 	<padding>
 		<Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
 	</padding>
