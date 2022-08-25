@@ -45,6 +45,14 @@
 			<artifactId>javafx-fxml</artifactId>
 			<version>18.0.2</version>
 		</dependency>
+
+		<!-- Plugins -->
+		<dependency>
+			<groupId>com.github.akman</groupId>
+			<artifactId>jpackage-maven-plugin</artifactId>
+			<version>0.1.5</version>
+			<type>maven-plugin</type>
+		</dependency>
 	</dependencies>
 
 	<profiles>
@@ -60,7 +68,6 @@
 					<plugin>
 						<groupId>com.github.akman</groupId>
 						<artifactId>jpackage-maven-plugin</artifactId>
-						<version>0.1.3</version>
 						<configuration combine.self="append">
 							<type>MSI</type>
 
@@ -74,20 +81,14 @@
 		</profile>
 
 		<profile>
-			<id>linux-build</id>
-			<activation>
-				<os>
-					<family>Linux</family>
-				</os>
-			</activation>
+			<id>rpm-build</id>
 			<build>
 				<plugins>
 					<plugin>
 						<groupId>com.github.akman</groupId>
 						<artifactId>jpackage-maven-plugin</artifactId>
-						<version>0.1.3</version>
 						<configuration combine.self="append">
-							<type>IMAGE</type>
+							<type>PKG</type>
 						</configuration>
 					</plugin>
 				</plugins>
@@ -125,7 +126,7 @@
 			<plugin>
 				<groupId>com.github.akman</groupId>
 				<artifactId>jpackage-maven-plugin</artifactId>
-				<version>0.1.3</version>
+				<version>0.1.5</version>
 				<configuration>
 					<toolhome>${env.JAVA_HOME}</toolhome>
 
