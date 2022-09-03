@@ -26,7 +26,7 @@
 				<BorderPane.margin>
 					<Insets left="8.0" />
 				</BorderPane.margin>
-				<Image url="@icon.png" />
+				<Image url="@../icon.png" />
 			</ImageView>
 		</left>
 		<center>

@@ -62,7 +62,7 @@ public class ZapitController {
 
 	@FXML
 	public void buttonAddServerOnAction() throws IOException {
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("connection-popup.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("popups/connection.fxml"));
 		Parent scene = fxmlLoader.load();
 
 		Stage stage = new Stage();
@@ -137,7 +137,7 @@ public class ZapitController {
 
 	@FXML
 	public void menuPreferencesOnAction() throws IOException {
-		FXMLLoader aboutLoader = new FXMLLoader(getClass().getResource("settings-popup.fxml"));
+		FXMLLoader aboutLoader = new FXMLLoader(getClass().getResource("popups/settings.fxml"));
 		Parent aboutScene = aboutLoader.load();
 
 		Stage aboutStage = new Stage();
@@ -168,7 +168,7 @@ public class ZapitController {
 
 	@FXML
 	public void menuAboutOnAction() throws IOException {
-		FXMLLoader aboutLoader = new FXMLLoader(getClass().getResource("about-popup.fxml"));
+		FXMLLoader aboutLoader = new FXMLLoader(getClass().getResource("popups/about.fxml"));
 		Parent aboutScene = aboutLoader.load();
 
 		Stage aboutStage = new Stage();
@@ -298,7 +298,6 @@ public class ZapitController {
 		} catch(MqttException e) {
 			disableUi();
 			showError("There was an MQTT error.", e.getMessage());
-			e.printStackTrace();
 		}
 
 		labelName.setText(activeConnection.getName());
