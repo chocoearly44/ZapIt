@@ -25,14 +25,14 @@ Please refer to the [Wiki Section][wiki-url].
 ![][macos-shield]
 
 ### Requirements
-- [Java 17](https://www.oracle.com/java/technologies/downloads/) or newer
+- [Java 18](https://jdk.java.net/18) or newer
 
 ### Linux
 #### Debian or Ubuntu
 Download DEB file from the [releases][releases-url]
 ### Arch or Manjaro
 Open terminal and run `yay -S zapit`
-### Fedora (untested)
+### Fedora
 Download RPM file from the [releases][releases-url]
 
 ### Windows
