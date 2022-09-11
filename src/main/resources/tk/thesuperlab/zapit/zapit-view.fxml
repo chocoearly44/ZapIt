@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <VBox alignment="TOP_CENTER" prefHeight="595.0" prefWidth="846.0" styleClass="background"
-	  xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
+	  xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
 	  fx:controller="tk.thesuperlab.zapit.ZapitController">
 	<MenuBar>
 		<Menu mnemonicParsing="false" text="File">
