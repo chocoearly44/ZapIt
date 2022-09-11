@@ -6,7 +6,7 @@
 
 	<groupId>tk.thesuperlab</groupId>
 	<artifactId>zapit</artifactId>
-	<version>1.1</version>
+	<version>1.2</version>
 	<name>ZapIt</name>
 
 	<properties>
@@ -88,7 +88,7 @@
 						<groupId>com.github.akman</groupId>
 						<artifactId>jpackage-maven-plugin</artifactId>
 						<configuration combine.self="append">
-							<type>PKG</type>
+							<type>rpm</type>
 						</configuration>
 					</plugin>
 				</plugins>
