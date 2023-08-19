@@ -1,54 +1,36 @@
 package tk.thesuperlab.zapit;
 
+import atlantafx.base.theme.Styles;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.geometry.NodeOrientation;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import jfxtras.styles.jmetro.JMetro;
-import jfxtras.styles.jmetro.Style;
-import org.eclipse.paho.client.mqttv3.*;
-import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
+import tk.thesuperlab.nitron.managers.AboutManager;
+import tk.thesuperlab.nitron.managers.NotificationManager;
+import tk.thesuperlab.nitron.managers.PreferencesManager;
+import tk.thesuperlab.nitron.utils.FxUtils;
 import tk.thesuperlab.zapit.entities.Connection;
-import tk.thesuperlab.zapit.entities.Message;
 import tk.thesuperlab.zapit.popups.ConnectionPopup;
 
+import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
-import static tk.thesuperlab.zapit.ZapitApplication.*;
+import static tk.thesuperlab.zapit.ZapitApplication.storageUtils;
+import static tk.thesuperlab.zapit.ZapitApplication.workspace;
 
 public class ZapitController {
-	private IMqttClient mqttClient;
+	private final ArrayList<Connection> activeConnections = new ArrayList<>();
 
+	@FXML
+	private StackPane stackPane;
 	@FXML
 	private ListView<String> listConnections;
 	@FXML
-	private Label labelName;
-	@FXML
-	private TextField fieldSendTopic;
-	@FXML
-	private Button buttonSend;
-	@FXML
-	private TextArea areaMessage;
-	@FXML
-	private Button buttonSubscribe;
-	@FXML
-	private TextField fieldReceiveTopic;
-	@FXML
-	private Accordion accordionSubs;
+	private TabPane tabs;
 
 	@FXML
 	public void initialize() {
@@ -61,53 +43,40 @@ public class ZapitController {
 	}
 
 	@FXML
-	public void buttonAddServerOnAction() throws IOException {
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("popups/connection.fxml"));
-		Parent scene = fxmlLoader.load();
-
-		Stage stage = new Stage();
-		stage.initModality(Modality.APPLICATION_MODAL);
-		stage.setTitle("Add connection");
-		stage.getIcons().add(new Image(ZapitController.class.getResourceAsStream("icon.png")));
-		stage.setScene(new Scene(scene));
-
-		JMetro jMetroConnection;
-		if(config.isDarkMode()) {
-			jMetroConnection = new JMetro(Style.DARK);
-		} else {
-			jMetroConnection = new JMetro(Style.LIGHT);
-		}
-
-		jMetroConnection.setParent(scene);
-
-		ConnectionPopup connectionPopup = fxmlLoader.getController();
-		connectionPopup.init(this);
-
-		stage.show();
+	public void buttonAddServerOnAction() {
+		FxUtils.openDialog(
+				new ConnectionPopup(this),
+				getClass().getResource("popups/connection.fxml"),
+				null,
+				ZapitController.class.getResource("icon.png"),
+				"Add connection"
+		);
 	}
 
 	@FXML
-	public void buttonConnectOnAction() {
-		if(listConnections.getSelectionModel().getSelectedItem() != null) {
-			connect();
+	public void buttonConnectOnAction() throws IOException {
+		if(listConnections.getSelectionModel().getSelectedItem() == null) {
+			return;
 		}
-	}
 
-	@FXML
-	public void buttonSubscribeOnAction() {
-		subscribeTopic(fieldReceiveTopic.getText());
-	}
-
-	@FXML
-	public void buttonSendOnAction() {
-		try {
-			MqttMessage msg = new MqttMessage(areaMessage.getText().getBytes(StandardCharsets.UTF_8));
-			msg.setQos(0);
-			msg.setRetained(true);
-			mqttClient.publish(fieldSendTopic.getText(), msg);
-		} catch(MqttException e) {
-			showError("There was an MQTT error.", e.getMessage());
+		Connection connection = workspace.getConnections().get(listConnections.getSelectionModel().getSelectedIndex());
+		if(activeConnections.contains(connection)) {
+			NotificationManager.showNotification("Already connected", Styles.DANGER, true, stackPane);
+			return;
 		}
+
+		activeConnections.add(connection);
+		ConnectionController connectionController = new ConnectionController(connection, stackPane);
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("connection-view.fxml"));
+		fxmlLoader.setControllerFactory(controllerClass -> connectionController);
+
+		Tab tab = new Tab(connection.getName());
+		tab.setContent(fxmlLoader.load());
+		tab.setClosable(true);
+		tab.setOnClosed(event -> connectionController.disconnect());
+
+		tabs.getTabs().add(tab);
+		tabs.setTabClosingPolicy(TabPane.TabClosingPolicy.ALL_TABS);
 	}
 
 	//TODO: connection editing support
@@ -125,8 +94,6 @@ public class ZapitController {
 			alert.showAndWait();
 
 			if(alert.getResult() == ButtonType.YES) {
-				stopMqtt();
-				disableUi();
 				int index = listConnections.getSelectionModel().getSelectedIndex();
 				workspace.getConnections().remove(index);
 				storageUtils.saveWorkspace(workspace);
@@ -137,7 +104,7 @@ public class ZapitController {
 
 	@FXML
 	public void menuPreferencesOnAction() throws IOException {
-		FXMLLoader aboutLoader = new FXMLLoader(getClass().getResource("popups/settings.fxml"));
+		/*FXMLLoader aboutLoader = new FXMLLoader(getClass().getResource("popups/settings.fxml"));
 		Parent aboutScene = aboutLoader.load();
 
 		Stage aboutStage = new Stage();
@@ -145,208 +112,36 @@ public class ZapitController {
 		aboutStage.setTitle("ZapIt settings");
 		aboutStage.getIcons().add(new Image(ZapitController.class.getResourceAsStream("icon.png")));
 		aboutStage.setScene(new Scene(aboutScene));
+		aboutStage.setOnHidden(windowEvent -> {
+			ZapitApplication.loadConfig();
+			refreshConnections();
+		});
 
-		JMetro jMetroSettings;
-		if(config.isDarkMode()) {
-			jMetroSettings = new JMetro(Style.DARK);
-		} else {
-			jMetroSettings = new JMetro(Style.LIGHT);
-		}
-
+		JMetro jMetroSettings = config.isDarkMode() ? new JMetro(Style.DARK) : new JMetro(Style.LIGHT);
 		jMetroSettings.setParent(aboutScene);
 
-		aboutStage.show();
+		aboutStage.show();*/
+
+		PreferencesManager.openWindow(new File("C:\\Users\\JurijFortuna\\zapit_workspace"));
 	}
 
 	@FXML
 	public void menuExitOnAction() {
-		stopMqtt();
-
-		Stage app = (Stage) buttonSubscribe.getScene().getWindow();
+		Stage app = (Stage) listConnections.getScene().getWindow();
 		app.close();
 	}
 
 	@FXML
-	public void menuAboutOnAction() throws IOException {
-		FXMLLoader aboutLoader = new FXMLLoader(getClass().getResource("popups/about.fxml"));
-		Parent aboutScene = aboutLoader.load();
-
-		Stage aboutStage = new Stage();
-		aboutStage.initModality(Modality.APPLICATION_MODAL);
-		aboutStage.setTitle("About");
-		aboutStage.getIcons().add(new Image(ZapitController.class.getResourceAsStream("icon.png")));
-		aboutStage.setScene(new Scene(aboutScene));
-
-		JMetro jMetroAbout;
-		if(config.isDarkMode()) {
-			jMetroAbout = new JMetro(Style.DARK);
-		} else {
-			jMetroAbout = new JMetro(Style.LIGHT);
-		}
-
-		jMetroAbout.setParent(aboutScene);
-
-		aboutStage.show();
-	}
-
-	public void subscribeTopic(String subTopic) {
-		VBox vBoxRoot = new VBox();
-		TitledPane titledPane = new TitledPane(subTopic, vBoxRoot);
-		titledPane.setAnimated(false);
-
-		// Table view
-		TableView<Message> tableView = new TableView<Message>();
-		tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-
-		TableColumn columnTimestamp = new TableColumn("Timestamp");
-		columnTimestamp.setCellValueFactory(new PropertyValueFactory<Message, Long>("timestamp"));
-		columnTimestamp.setSortType(TableColumn.SortType.DESCENDING);
-
-		TableColumn columnTime = new TableColumn("Time");
-		columnTime.setCellValueFactory(new PropertyValueFactory<Message, String>("time"));
-		columnTime.setSortable(false);
-
-		TableColumn columnMessage = new TableColumn("Message");
-		columnMessage.setCellValueFactory(new PropertyValueFactory<Message, String>("message"));
-		columnMessage.setSortable(false);
-
-		tableView.getColumns().addAll(columnTimestamp, columnTime, columnMessage);
-		tableView.getSortOrder().add(columnTimestamp);
-
-		// Button bar
-		HBox hBoxButtonBar = new HBox();
-		hBoxButtonBar.setSpacing(8.0);
-		hBoxButtonBar.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
-
-		Button buttonClear = new Button("Clear");
-		buttonClear.setDefaultButton(true);
-		buttonClear.setOnAction(event -> {
-			tableView.getItems().clear();
-			tableView.refresh();
-		});
-
-		Button buttonUnsubscribe = new Button("Unsubscribe");
-		buttonUnsubscribe.setOnAction(event -> {
-			try {
-				mqttClient.unsubscribe(subTopic);
-				accordionSubs.getPanes().remove(titledPane);
-			} catch(MqttException e) {
-				showError("There was an MQTT error.", e.getMessage());
-			}
-		});
-
-		hBoxButtonBar.getChildren().add(buttonClear);
-		hBoxButtonBar.getChildren().add(buttonUnsubscribe);
-
-		// Finish
-		vBoxRoot.getChildren().add(hBoxButtonBar);
-		VBox.setMargin(hBoxButtonBar, new Insets(0, 0, 8, 0));
-
-		vBoxRoot.getChildren().add(tableView);
-		VBox.setVgrow(tableView, Priority.ALWAYS);
-
-		accordionSubs.getPanes().add(titledPane);
-
-		try {
-			mqttClient.subscribe(subTopic, (topic, msg) -> {
-				byte[] payload = msg.getPayload();
-
-				Timestamp stamp = new Timestamp(System.currentTimeMillis());
-				Date date = new Date(stamp.getTime());
-				SimpleDateFormat sdf = new SimpleDateFormat("h:mm:ss");
-
-				tableView.getItems().add(
-						new Message(
-								stamp.getTime(),
-								sdf.format(date),
-								new String(payload, StandardCharsets.UTF_8)
-						)
-				);
-
-				tableView.refresh();
-				tableView.sort();
-			});
-		} catch(MqttException e) {
-			showError("There was an MQTT error.", e.getMessage());
-		}
-	}
-
-	public void connect() {
-		Connection activeConnection = workspace.getConnections().get(listConnections.getSelectionModel().getSelectedIndex());
-
-		try {
-			stopMqtt();
-			enableUi();
-
-			mqttClient = new MqttClient(activeConnection.getHostname(), activeConnection.getClientId(), new MemoryPersistence());
-
-			MqttConnectOptions options = new MqttConnectOptions();
-			options.setAutomaticReconnect(activeConnection.isAutoReconnect());
-			options.setCleanSession(activeConnection.isCleanSession());
-			options.setConnectionTimeout(10);
-			options.setKeepAliveInterval(activeConnection.getKeepAlive());
-
-			String username = activeConnection.getUsername();
-			String password = activeConnection.getPassword();
-
-			if(!username.isEmpty() && !username.isBlank() && !password.isEmpty() && !password.isBlank()) {
-				options.setUserName(activeConnection.getUsername());
-				options.setPassword(activeConnection.getPassword().toCharArray());
-			}
-
-			mqttClient.connect(options);
-		} catch(MqttException e) {
-			disableUi();
-			showError("There was an MQTT error.", e.getMessage());
-		}
-
-		labelName.setText(activeConnection.getName());
+	public void menuAboutOnAction() {
+		AboutManager.openWindow(
+				ZapitApplication.class.getResource("icon.png"),
+				ResourceBundle.getBundle("locales.messages", new Locale("en", "en"))
+		);
 	}
 
 	public void refreshConnections() {
 		listConnections.getItems().clear();
 		workspace.getConnections().forEach(connection -> listConnections.getItems().add(connection.getName()));
 		listConnections.refresh();
-	}
-
-	public void disableUi() {
-		fieldSendTopic.setDisable(true);
-		fieldReceiveTopic.setDisable(true);
-		buttonSend.setDisable(true);
-		areaMessage.setDisable(true);
-		buttonSubscribe.setDisable(true);
-	}
-
-	public void enableUi() {
-		fieldSendTopic.setDisable(false);
-		fieldReceiveTopic.setDisable(false);
-		buttonSend.setDisable(false);
-		areaMessage.setDisable(false);
-		buttonSubscribe.setDisable(false);
-	}
-
-	public void stopMqtt() {
-		try {
-			if(mqttClient == null) {
-				return;
-			}
-
-			if(mqttClient.isConnected()) {
-				mqttClient.disconnect();
-			}
-
-			accordionSubs.getPanes().clear();
-			mqttClient.close();
-		} catch(MqttException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void showError(String headerText, String contentText) {
-		Alert alert = new Alert(Alert.AlertType.ERROR);
-		alert.setTitle("ZapIt Error");
-		alert.setHeaderText(headerText);
-		alert.setContentText(contentText);
-		alert.showAndWait();
 	}
 }

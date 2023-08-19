@@ -1,14 +1,11 @@
 package tk.thesuperlab.zapit;
 
+import atlantafx.base.theme.PrimerDark;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
-import jfxtras.styles.jmetro.JMetro;
-import jfxtras.styles.jmetro.Style;
 import tk.thesuperlab.zapit.entities.Config;
 import tk.thesuperlab.zapit.entities.Workspace;
 import tk.thesuperlab.zapit.utils.StorageUtils;
@@ -16,6 +13,8 @@ import tk.thesuperlab.zapit.utils.filesystem.UnixStorage;
 import tk.thesuperlab.zapit.utils.filesystem.WindowsStorage;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class ZapitApplication extends Application {
 	public static StorageUtils storageUtils;
@@ -24,6 +23,11 @@ public class ZapitApplication extends Application {
 
 	public static void main(String[] args) {
 		launch();
+	}
+
+	public static void loadConfig() {
+		config = storageUtils.getConfig();
+		workspace = storageUtils.getWorkspace();
 	}
 
 	@Override
@@ -40,33 +44,18 @@ public class ZapitApplication extends Application {
 		storageUtils.initialise();
 
 		// Load files
-		config = storageUtils.getConfig();
-		workspace = storageUtils.getWorkspace();
+		loadConfig();
 
 		// Setup JavaFX
+		Application.setUserAgentStylesheet(new PrimerDark().getUserAgentStylesheet());
+
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("zapit-view.fxml"));
-		Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
+		fxmlLoader.setResources(ResourceBundle.getBundle("locales.messages", new Locale("en", "en")));
+
+		Scene scene = new Scene(fxmlLoader.load(), 1500, 800);
 		stage.setTitle("ZapIt");
 		stage.getIcons().add(new Image(ZapitController.class.getResourceAsStream("icon.png")));
 		stage.setScene(scene);
-
-		JMetro jMetro;
-		if(config.isDarkMode()) {
-			jMetro = new JMetro(Style.DARK);
-		} else {
-			jMetro = new JMetro(Style.LIGHT);
-		}
-
-		jMetro.setScene(scene);
-
-		ZapitController controller = fxmlLoader.getController();
 		stage.show();
-
-		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-			@Override
-			public void handle(WindowEvent event) {
-				controller.stopMqtt();
-			}
-		});
 	}
 }

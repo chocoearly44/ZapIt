@@ -1,11 +1,11 @@
 package tk.thesuperlab.zapit.popups;
 
+import atlantafx.base.controls.ToggleSwitch;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.controlsfx.control.ToggleSwitch;
 import tk.thesuperlab.zapit.ZapitController;
 import tk.thesuperlab.zapit.entities.Connection;
 
@@ -15,7 +15,7 @@ import static tk.thesuperlab.zapit.ZapitApplication.storageUtils;
 import static tk.thesuperlab.zapit.ZapitApplication.workspace;
 
 public class ConnectionPopup {
-	private ZapitController hostController;
+	private final ZapitController zapitController;
 
 	@FXML
 	private Button buttonAdd;
@@ -41,6 +41,10 @@ public class ConnectionPopup {
 	private TextField fieldUsername;
 	@FXML
 	private TextField fieldPassword;
+
+	public ConnectionPopup(ZapitController zapitController) {
+		this.zapitController = zapitController;
+	}
 
 	@FXML
 	public void initialize() {
@@ -74,7 +78,7 @@ public class ConnectionPopup {
 		storageUtils.saveWorkspace(workspace);
 
 		Stage stage = (Stage) buttonAdd.getScene().getWindow();
-		hostController.refreshConnections();
+		zapitController.refreshConnections();
 		stage.close();
 	}
 
@@ -82,10 +86,6 @@ public class ConnectionPopup {
 	public void buttonCancelOnAction() {
 		Stage stage = (Stage) buttonCancel.getScene().getWindow();
 		stage.close();
-	}
-
-	public void init(ZapitController zapitController) {
-		this.hostController = zapitController;
 	}
 
 	private String randomClientId() {

@@ -1,0 +1,10 @@
+categories:
+  - label: User Interface
+    subcategories:
+      - label: Apperance
+        groups:
+          - label:
+            preferences:
+              - type: BOOL
+                label: boolean property
+                value: true

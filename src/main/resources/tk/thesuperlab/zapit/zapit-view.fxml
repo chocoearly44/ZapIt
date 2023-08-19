@@ -2,12 +2,11 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.input.KeyCodeCombination?>
+<?import javafx.scene.input.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
-<VBox alignment="TOP_CENTER" prefHeight="595.0" prefWidth="846.0" styleClass="background"
-	  xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-	  fx:controller="tk.thesuperlab.zapit.ZapitController">
+<?import javafx.scene.text.*?>
+
+<VBox alignment="TOP_CENTER" prefHeight="595.0" prefWidth="846.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tk.thesuperlab.zapit.ZapitController">
 	<MenuBar>
 		<Menu mnemonicParsing="false" text="File">
 			<MenuItem mnemonicParsing="false" onAction="#menuPreferencesOnAction" text="Settings">
@@ -15,13 +14,16 @@
 					<KeyCodeCombination alt="DOWN" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
 				</accelerator>
 			</MenuItem>
+
 			<SeparatorMenuItem mnemonicParsing="false" />
+
 			<MenuItem mnemonicParsing="false" onAction="#menuExitOnAction" text="Exit">
 				<accelerator>
 					<KeyCodeCombination alt="UP" code="Q" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
 				</accelerator>
 			</MenuItem>
 		</Menu>
+
 		<Menu mnemonicParsing="false" text="Help">
 			<MenuItem mnemonicParsing="false" onAction="#menuAboutOnAction" text="About">
 				<accelerator>
@@ -30,134 +32,64 @@
 			</MenuItem>
 		</Menu>
 	</MenuBar>
-	<BorderPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-		<left>
-			<VBox BorderPane.alignment="CENTER">
-				<HBox alignment="CENTER" VBox.vgrow="NEVER">
-					<AnchorPane HBox.hgrow="ALWAYS">
-						<Label text="Connections" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0"
-							   AnchorPane.topAnchor="0.0">
-							<font>
-								<Font size="18.0" />
-							</font>
-							<padding>
-								<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-							</padding>
-						</Label>
-					</AnchorPane>
-					<AnchorPane HBox.hgrow="ALWAYS">
-						<padding>
-							<Insets bottom="5.0" right="8.0" top="5.0" />
-						</padding>
-						<opaqueInsets>
-							<Insets />
-						</opaqueInsets>
-						<Button mnemonicParsing="false" onAction="#buttonAddServerOnAction" text="Add"
-								AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-					</AnchorPane>
-					<AnchorPane HBox.hgrow="ALWAYS">
-						<padding>
-							<Insets bottom="5.0" top="5.0" />
-						</padding>
-						<opaqueInsets>
-							<Insets />
-						</opaqueInsets>
-						<Button defaultButton="true" mnemonicParsing="false" onAction="#buttonConnectOnAction"
-								text="Connect" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0"
-								AnchorPane.topAnchor="0.0" />
-					</AnchorPane>
-				</HBox>
-
-				<ListView fx:id="listConnections" prefHeight="297.0" prefWidth="218.0" VBox.vgrow="ALWAYS">
-					<contextMenu>
-						<ContextMenu>
-							<items>
-								<!--<MenuItem fx:id="menuConnectionsEdit" onAction="#menuConnectionsEditOnAction" text="Edit connection" />-->
-								<MenuItem onAction="#menuConnectionsRemoveOnAction" text="Remove connection" />
-							</items>
-						</ContextMenu>
-					</contextMenu>
-				</ListView>
-			</VBox>
-		</left>
-		<center>
-			<VBox spacing="15.0" BorderPane.alignment="CENTER">
-				<padding>
-					<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-				</padding>
-				<Label fx:id="labelName" text="Connection">
-					<font>
-						<Font size="33.0" />
-					</font>
-				</Label>
-				<VBox prefHeight="200.0" prefWidth="100.0">
-					<Label text="Connection">
-						<font>
-							<Font size="18.0" />
-						</font>
-						<padding>
-							<Insets bottom="8.0" />
-						</padding>
-					</Label>
-					<HBox VBox.vgrow="NEVER">
-						<opaqueInsets>
-							<Insets bottom="8.0" />
-						</opaqueInsets>
-						<AnchorPane HBox.hgrow="ALWAYS">
-							<padding>
-								<Insets right="8.0" />
-							</padding>
-							<TextField fx:id="fieldSendTopic" disable="true" promptText="Enter topic"
-									   AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-									   AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-						</AnchorPane>
-						<AnchorPane>
-							<Button fx:id="buttonSend" defaultButton="true" disable="true" mnemonicParsing="false"
-									onAction="#buttonSendOnAction" text="Publish" AnchorPane.bottomAnchor="0.0"
-									AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-						</AnchorPane>
-					</HBox>
-					<TextArea fx:id="areaMessage" disable="true" prefHeight="200.0" prefWidth="200.0"
-							  promptText="Enter message" wrapText="true">
-						<VBox.margin>
-							<Insets top="8.0" />
-						</VBox.margin>
-					</TextArea>
-				</VBox>
-				<VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
-					<Label text="Subscribe">
-						<font>
-							<Font size="18.0" />
-						</font>
-						<padding>
-							<Insets bottom="8.0" />
-						</padding>
-					</Label>
-					<HBox VBox.vgrow="NEVER">
-						<opaqueInsets>
-							<Insets bottom="8.0" />
-						</opaqueInsets>
-						<AnchorPane HBox.hgrow="ALWAYS">
-							<padding>
-								<Insets right="8.0" />
-							</padding>
-							<TextField fx:id="fieldReceiveTopic" disable="true" promptText="Enter topic"
-									   AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-									   AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-						</AnchorPane>
-						<AnchorPane>
-							<Button fx:id="buttonSubscribe" defaultButton="true" disable="true" mnemonicParsing="false"
-									onAction="#buttonSubscribeOnAction" text="Subscribe" AnchorPane.bottomAnchor="0.0"
-									AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-						</AnchorPane>
-					</HBox>
-					<Accordion fx:id="accordionSubs" VBox.vgrow="ALWAYS">
-						<VBox.margin>
-							<Insets top="8.0" />
-						</VBox.margin>
-					</Accordion>
-				</VBox>
-			</VBox>
-		</center>
-	</BorderPane>
+   <StackPane fx:id="stackPane" VBox.vgrow="ALWAYS">
+      <children>
+      
+      	<BorderPane>
+      		<left>
+      			<VBox BorderPane.alignment="CENTER">
+      				<HBox alignment="CENTER" VBox.vgrow="NEVER">
+      					<AnchorPane HBox.hgrow="ALWAYS">
+      						<Label text="Connections" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      							<font>
+      								<Font size="18.0" />
+      							</font>
+      							<padding>
+      								<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+      							</padding>
+      						</Label>
+      					</AnchorPane>
+      
+      					<AnchorPane HBox.hgrow="ALWAYS">
+      						<padding>
+      							<Insets bottom="5.0" right="8.0" top="5.0" />
+      						</padding>
+      						<opaqueInsets>
+      							<Insets />
+      						</opaqueInsets>
+      
+      						<Button mnemonicParsing="false" onAction="#buttonAddServerOnAction" text="Add" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      					</AnchorPane>
+      
+      					<AnchorPane HBox.hgrow="ALWAYS">
+      						<padding>
+      							<Insets bottom="5.0" top="5.0" />
+      						</padding>
+      						<opaqueInsets>
+      							<Insets />
+      						</opaqueInsets>
+      
+      						<Button defaultButton="true" mnemonicParsing="false" onAction="#buttonConnectOnAction" text="Connect" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      					</AnchorPane>
+      				</HBox>
+      
+      				<ListView fx:id="listConnections" prefWidth="218.0" VBox.vgrow="ALWAYS">
+      					<contextMenu>
+      						<ContextMenu>
+      							<items>
+      								<!--<MenuItem fx:id="menuConnectionsEdit" onAction="#menuConnectionsEditOnAction" text="Edit connection" />-->
+      								<MenuItem onAction="#menuConnectionsRemoveOnAction" text="Remove connection" />
+      							</items>
+      						</ContextMenu>
+      					</contextMenu>
+      				</ListView>
+      			</VBox>
+      		</left>
+      
+      		<center>
+      			<TabPane fx:id="tabs" styleClass="floating" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER" />
+      		</center>
+      	</BorderPane>
+      </children>
+   </StackPane>
 </VBox>
