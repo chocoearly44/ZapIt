@@ -71,13 +71,7 @@ public class ZapitController {
 		stage.getIcons().add(new Image(ZapitController.class.getResourceAsStream("icon.png")));
 		stage.setScene(new Scene(scene));
 
-		JMetro jMetroConnection;
-		if(config.isDarkMode()) {
-			jMetroConnection = new JMetro(Style.DARK);
-		} else {
-			jMetroConnection = new JMetro(Style.LIGHT);
-		}
-
+		JMetro jMetroConnection = config.isDarkMode() ? new JMetro(Style.DARK) : new JMetro(Style.LIGHT);
 		jMetroConnection.setParent(scene);
 
 		ConnectionPopup connectionPopup = fxmlLoader.getController();
@@ -146,13 +140,7 @@ public class ZapitController {
 		aboutStage.getIcons().add(new Image(ZapitController.class.getResourceAsStream("icon.png")));
 		aboutStage.setScene(new Scene(aboutScene));
 
-		JMetro jMetroSettings;
-		if(config.isDarkMode()) {
-			jMetroSettings = new JMetro(Style.DARK);
-		} else {
-			jMetroSettings = new JMetro(Style.LIGHT);
-		}
-
+		JMetro jMetroSettings = config.isDarkMode() ? new JMetro(Style.DARK) : new JMetro(Style.LIGHT);
 		jMetroSettings.setParent(aboutScene);
 
 		aboutStage.show();
@@ -177,13 +165,7 @@ public class ZapitController {
 		aboutStage.getIcons().add(new Image(ZapitController.class.getResourceAsStream("icon.png")));
 		aboutStage.setScene(new Scene(aboutScene));
 
-		JMetro jMetroAbout;
-		if(config.isDarkMode()) {
-			jMetroAbout = new JMetro(Style.DARK);
-		} else {
-			jMetroAbout = new JMetro(Style.LIGHT);
-		}
-
+		JMetro jMetroAbout = config.isDarkMode() ? new JMetro(Style.DARK) : new JMetro(Style.LIGHT);
 		jMetroAbout.setParent(aboutScene);
 
 		aboutStage.show();

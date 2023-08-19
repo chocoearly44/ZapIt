@@ -50,23 +50,12 @@ public class ZapitApplication extends Application {
 		stage.getIcons().add(new Image(ZapitController.class.getResourceAsStream("icon.png")));
 		stage.setScene(scene);
 
-		JMetro jMetro;
-		if(config.isDarkMode()) {
-			jMetro = new JMetro(Style.DARK);
-		} else {
-			jMetro = new JMetro(Style.LIGHT);
-		}
-
+		JMetro jMetro = config.isDarkMode() ? new JMetro(Style.DARK) : new JMetro(Style.LIGHT);
 		jMetro.setScene(scene);
 
 		ZapitController controller = fxmlLoader.getController();
 		stage.show();
 
-		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-			@Override
-			public void handle(WindowEvent event) {
-				controller.stopMqtt();
-			}
-		});
+		stage.setOnCloseRequest(event -> controller.stopMqtt());
 	}
 }
