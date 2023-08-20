@@ -25,18 +25,21 @@ Please refer to the [Wiki Section][wiki-url].
 ![][macos-shield]
 
 ### Requirements
-- [Java 18](https://jdk.java.net/18) or newer
+- [Java 22](https://jdk.java.net/22) or newer
 
 ### Linux
 #### Debian or Ubuntu
 Download DEB file from the [releases][releases-url]
-### Arch or Manjaro
+#### Arch or Manjaro
 Open terminal and run `yay -S zapit`
-### Fedora
+#### Fedora
 Download RPM file from the [releases][releases-url]
 
 ### Windows
 Download installer from the [releases][releases-url]
+
+### Platform independent
+Download executable JAR from the [releases][releases-url]
 
 ## Bug reporting
 If you encounter any bugs while using ZapIt, please report them in the [Issues Section][issues-url].

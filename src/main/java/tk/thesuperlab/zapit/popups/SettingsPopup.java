@@ -1,13 +1,10 @@
 package tk.thesuperlab.zapit.popups;
 
-import javafx.application.Platform;
+import atlantafx.base.controls.ToggleSwitch;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.controlsfx.control.ToggleSwitch;
 import tk.thesuperlab.zapit.entities.Config;
 
 import java.io.File;
@@ -44,20 +41,25 @@ public class SettingsPopup {
 
 	@FXML
 	private void buttonSaveOnAction() {
-		Alert alert = new Alert(Alert.AlertType.WARNING, "ZapIt will now close to apply your settings.", ButtonType.CANCEL, ButtonType.OK);
+		/*Alert alert = new Alert(Alert.AlertType.WARNING, "ZapIt will now close to apply your settings.", ButtonType.CANCEL, ButtonType.OK);
 		alert.showAndWait();
 
 		if(alert.getResult() == ButtonType.OK) {
-			config.setWorkspacePath(fieldWorkspacePath.getText());
-			config.setDarkMode(switchDarkMode.isSelected());
-			storageUtils.saveConfig(config);
+
 
 			Platform.exit();
 			System.exit(0);
 		} else {
 			Stage stage = (Stage) switchDarkMode.getScene().getWindow();
 			stage.close();
-		}
+		}*/
+
+		config.setWorkspacePath(fieldWorkspacePath.getText());
+		config.setDarkMode(switchDarkMode.isSelected());
+		storageUtils.saveConfig(config);
+
+		Stage stage = (Stage) switchDarkMode.getScene().getWindow();
+		stage.close();
 	}
 
 	@FXML

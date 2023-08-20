@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import atlantafx.base.layout.InputGroup?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="453.0" prefWidth="796.0" spacing="15.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
+	  xmlns:fx="http://javafx.com/fxml/1" fx:controller="tk.thesuperlab.zapit.ConnectionController">
+	<Label fx:id="labelName" text="Connection name">
+		<font>
+			<Font size="33.0"/>
+		</font>
+	</Label>
+
+	<VBox prefHeight="200.0" prefWidth="100.0">
+		<Label text="Connection">
+			<font>
+				<Font size="18.0"/>
+			</font>
+			<padding>
+				<Insets bottom="8.0"/>
+			</padding>
+		</Label>
+
+		<InputGroup>
+			<TextField fx:id="fieldSendTopic" disable="true" promptText="Enter topic" HBox.hgrow="ALWAYS"/>
+			<Button fx:id="buttonSend" defaultButton="true" disable="true" mnemonicParsing="false"
+					onAction="#buttonSendOnAction" text="Publish"/>
+		</InputGroup>
+
+		<TextArea fx:id="areaMessage" disable="true" prefHeight="200.0" prefWidth="200.0" promptText="Enter message"
+				  wrapText="true">
+			<VBox.margin>
+				<Insets top="8.0"/>
+			</VBox.margin>
+		</TextArea>
+	</VBox>
+
+	<VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+		<Label text="Subscribe">
+			<font>
+				<Font size="18.0"/>
+			</font>
+			<padding>
+				<Insets bottom="8.0"/>
+			</padding>
+		</Label>
+
+		<InputGroup>
+			<TextField fx:id="fieldReceiveTopic" disable="true" promptText="Enter topic" HBox.hgrow="ALWAYS"/>
+			<Button fx:id="buttonSubscribe" defaultButton="true" disable="true" mnemonicParsing="false"
+					onAction="#buttonSubscribeOnAction" text="Subscribe"/>
+		</InputGroup>
+
+		<Accordion fx:id="accordionSubs" VBox.vgrow="ALWAYS">
+			<VBox.margin>
+				<Insets top="8.0"/>
+			</VBox.margin>
+		</Accordion>
+	</VBox>
+
+	<padding>
+		<Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+	</padding>
+</VBox>

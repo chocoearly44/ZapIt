@@ -1,24 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.collections.FXCollections?>
+<?import atlantafx.base.controls.*?>
+<?import atlantafx.base.layout.*?>
+<?import java.lang.*?>
+<?import javafx.collections.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<?import org.controlsfx.control.ToggleSwitch?>
-<?import java.lang.String?>
-<VBox prefHeight="447.0" prefWidth="563.0" styleClass="background" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="tk.thesuperlab.zapit.popups.ConnectionPopup">
+
+<VBox prefHeight="447.0" prefWidth="563.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tk.thesuperlab.zapit.popups.ConnectionPopup">
 	<padding>
-		<Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+		<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
 	</padding>
+
 	<BorderPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
 		<center>
 			<VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
 				<Label text="Add connection" VBox.vgrow="ALWAYS">
 					<font>
-						<Font size="18.0" />
+						<Font size="18.0"/>
 					</font>
 				</Label>
+
+				<!-- MQTT Connection -->
 				<Label text="MQTT Connection">
 					<VBox.margin>
 						<Insets bottom="2.0" top="13.0" />
@@ -27,7 +32,10 @@
 						<Font size="14.0" />
 					</font>
 				</Label>
+
 				<TextField fx:id="fieldName" promptText="Enter connection name" />
+
+				<!-- MQTT Connection -->
 				<Label text="Host">
 					<VBox.margin>
 						<Insets bottom="2.0" top="13.0" />
@@ -36,7 +44,8 @@
 						<Font size="14.0" />
 					</font>
 				</Label>
-				<HBox alignment="CENTER_LEFT" spacing="8.0" VBox.vgrow="NEVER">
+
+				<InputGroup>
 					<ComboBox fx:id="comboProtocol">
 						<items>
 							<FXCollections fx:factory="observableArrayList">
@@ -50,7 +59,9 @@
 					</ComboBox>
 					<TextField fx:id="fieldHost" promptText="Enter host name" HBox.hgrow="ALWAYS" />
 					<TextField fx:id="fieldPort" promptText="Enter port" text="1883" />
-				</HBox>
+				</InputGroup>
+
+				<!-- Session settings -->
 				<Label text="Session settings">
 					<VBox.margin>
 						<Insets bottom="2.0" top="13.0" />
@@ -59,45 +70,40 @@
 						<Font size="14.0" />
 					</font>
 				</Label>
-				<HBox alignment="CENTER_LEFT" VBox.vgrow="NEVER">
+
+				<HBox alignment="CENTER_LEFT" spacing="10.0" VBox.vgrow="NEVER">
 					<AnchorPane HBox.hgrow="ALWAYS">
 						<HBox.margin>
 							<Insets right="16.0" />
 						</HBox.margin>
-						<ToggleSwitch fx:id="switchClean" selected="true" text="Clean session"
-									  AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-									  AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+						<ToggleSwitch fx:id="switchClean" selected="true" text="Clean session" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
 					</AnchorPane>
 					<AnchorPane HBox.hgrow="ALWAYS">
 						<HBox.margin>
 							<Insets right="16.0" />
 						</HBox.margin>
-						<ToggleSwitch fx:id="switchReconnect" selected="true" text="Auto reconnect"
-									  AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-									  AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+						<ToggleSwitch fx:id="switchReconnect" selected="true" text="Auto reconnect" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
 					</AnchorPane>
 					<AnchorPane HBox.hgrow="ALWAYS">
 						<HBox.margin>
 							<Insets />
 						</HBox.margin>
-						<TextField fx:id="fieldAlive" promptText="Keep alive (seconds)" text="120"
-								   AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-								   AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+						<TextField fx:id="fieldAlive" promptText="Keep alive (seconds)" text="120" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
 					</AnchorPane>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
 				</HBox>
-				<Label text="Session settings">
-					<VBox.margin>
-						<Insets bottom="2.0" top="13.0" />
-					</VBox.margin>
-					<font>
-						<Font size="14.0" />
-					</font>
-				</Label>
-				<HBox alignment="CENTER_LEFT" spacing="8.0" VBox.vgrow="NEVER">
+
+				<InputGroup>
 					<TextField fx:id="fieldClientId" promptText="Enter client ID" HBox.hgrow="ALWAYS" />
-					<Button mnemonicParsing="false" onAction="#buttonRandomIdOnAction"
-							text="Generate a random client ID" />
-				</HBox>
+					<Button mnemonicParsing="false" onAction="#buttonRandomIdOnAction" text="Generate a random client ID" />
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+				</InputGroup>
+
+				<!-- Authentication -->
 				<Label text="Authentication">
 					<VBox.margin>
 						<Insets bottom="2.0" top="13.0" />
@@ -106,18 +112,21 @@
 						<Font size="14.0" />
 					</font>
 				</Label>
-				<HBox alignment="CENTER_LEFT" spacing="8.0">
+
+				<HBox alignment="CENTER_LEFT" spacing="10.0" VBox.vgrow="NEVER">
 					<TextField fx:id="fieldUsername" promptText="Enter username" HBox.hgrow="ALWAYS" />
 					<PasswordField fx:id="fieldPassword" promptText="Enter password" HBox.hgrow="ALWAYS" />
 				</HBox>
 			</VBox>
 		</center>
+
 		<bottom>
-			<HBox nodeOrientation="RIGHT_TO_LEFT" spacing="8.0" BorderPane.alignment="CENTER">
-				<Button fx:id="buttonAdd" defaultButton="true" mnemonicParsing="false" onAction="#buttonAddOnAction"
-						text="Add connection" />
-				<Button fx:id="buttonCancel" cancelButton="true" mnemonicParsing="false"
-						onAction="#buttonCancelOnAction" text="Cancel" />
+			<HBox nodeOrientation="RIGHT_TO_LEFT" spacing="10.0" BorderPane.alignment="CENTER">
+				<Button fx:id="buttonAdd" defaultButton="true" mnemonicParsing="false" onAction="#buttonAddOnAction" text="Add connection" />
+				<Button fx:id="buttonCancel" cancelButton="true" mnemonicParsing="false" onAction="#buttonCancelOnAction" text="Cancel" />
+            <BorderPane.margin>
+               <Insets top="10.0" />
+            </BorderPane.margin>
 			</HBox>
 		</bottom>
 	</BorderPane>
