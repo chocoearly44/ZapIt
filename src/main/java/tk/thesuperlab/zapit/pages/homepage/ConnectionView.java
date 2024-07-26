@@ -1,4 +1,4 @@
-package tk.thesuperlab.zapit;
+package tk.thesuperlab.zapit.pages.homepage;
 
 import atlantafx.base.theme.Styles;
 import javafx.fxml.FXML;
@@ -26,7 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-public class ConnectionController implements Initializable {
+public class ConnectionView implements Initializable {
 	private final Connection connection;
 	private final StackPane parentPane;
 
@@ -47,7 +47,7 @@ public class ConnectionController implements Initializable {
 	@FXML
 	private Accordion accordionSubs;
 
-	public ConnectionController(Connection connection, StackPane parentPane) {
+	public ConnectionView(Connection connection, StackPane parentPane) {
 		this.connection = connection;
 		this.parentPane = parentPane;
 
@@ -70,7 +70,7 @@ public class ConnectionController implements Initializable {
 			String username = connection.getUsername();
 			String password = connection.getPassword();
 
-			if(!username.isEmpty() && !username.isBlank() && !password.isEmpty() && !password.isBlank()) {
+			if(!username.isEmpty() && !password.isEmpty()) {
 				options.setUserName(connection.getUsername());
 				options.setPassword(connection.getPassword().toCharArray());
 			}
@@ -112,16 +112,16 @@ public class ConnectionController implements Initializable {
 		TableView<Message> tableView = new TableView<>();
 		tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-		TableColumn columnTimestamp = new TableColumn("Timestamp");
-		columnTimestamp.setCellValueFactory(new PropertyValueFactory<Message, Long>("timestamp"));
+		TableColumn<Message, Long> columnTimestamp = new TableColumn<>("Timestamp");
+		columnTimestamp.setCellValueFactory(new PropertyValueFactory<>("timestamp"));
 		columnTimestamp.setSortType(TableColumn.SortType.DESCENDING);
 
-		TableColumn columnTime = new TableColumn("Time");
-		columnTime.setCellValueFactory(new PropertyValueFactory<Message, String>("time"));
+		TableColumn<Message, String> columnTime = new TableColumn<>("Time");
+		columnTime.setCellValueFactory(new PropertyValueFactory<>("time"));
 		columnTime.setSortable(false);
 
-		TableColumn columnMessage = new TableColumn("Message");
-		columnMessage.setCellValueFactory(new PropertyValueFactory<Message, String>("message"));
+		TableColumn<Message, String> columnMessage = new TableColumn<>("Message");
+		columnMessage.setCellValueFactory(new PropertyValueFactory<>("message"));
 		columnMessage.setSortable(false);
 
 		tableView.getColumns().addAll(columnTimestamp, columnTime, columnMessage);

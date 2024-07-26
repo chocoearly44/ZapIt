@@ -38,7 +38,7 @@ Download RPM file from the [releases][releases-url]
 ### Windows
 Download installer from the [releases][releases-url]
 
-### Platform independent
+### Other
 Download executable JAR from the [releases][releases-url]
 
 ## Bug reporting

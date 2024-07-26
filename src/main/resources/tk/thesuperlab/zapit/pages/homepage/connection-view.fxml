@@ -5,9 +5,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-
 <VBox prefHeight="453.0" prefWidth="796.0" spacing="15.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
-	  xmlns:fx="http://javafx.com/fxml/1" fx:controller="tk.thesuperlab.zapit.ConnectionController">
+	  xmlns:fx="http://javafx.com/fxml/1" fx:controller="tk.thesuperlab.zapit.pages.homepage.ConnectionView">
 	<Label fx:id="labelName" text="Connection name">
 		<font>
 			<Font size="33.0"/>

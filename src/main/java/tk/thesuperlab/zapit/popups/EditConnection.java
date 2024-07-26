@@ -6,16 +6,18 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import tk.thesuperlab.zapit.ZapitController;
 import tk.thesuperlab.zapit.entities.Connection;
+import tk.thesuperlab.zapit.pages.Homepage;
 
 import java.util.UUID;
 
-import static tk.thesuperlab.zapit.ZapitApplication.storageUtils;
 import static tk.thesuperlab.zapit.ZapitApplication.workspace;
+import static tk.thesuperlab.zapit.ZapitApplication.workspaceConfigurator;
 
-public class ConnectionPopup {
-	private final ZapitController zapitController;
+public class EditConnection {
+	private final Homepage homepageController;
+
+	private Connection connection;
 
 	@FXML
 	private Button buttonAdd;
@@ -42,13 +44,24 @@ public class ConnectionPopup {
 	@FXML
 	private TextField fieldPassword;
 
-	public ConnectionPopup(ZapitController zapitController) {
-		this.zapitController = zapitController;
+	public EditConnection(Homepage homepageController, Connection connection) {
+		this.homepageController = homepageController;
+		this.connection = connection;
 	}
 
 	@FXML
 	public void initialize() {
-		fieldClientId.setText(randomClientId());
+		if(connection != null) {
+			fieldName.setText(connection.getName());
+			fieldClientId.setText(connection.getClientId());
+			fieldAlive.setText(String.valueOf(connection.getKeepAlive()));
+			switchClean.setSelected(connection.isCleanSession());
+			switchReconnect.setSelected(connection.isAutoReconnect());
+			fieldUsername.setText(connection.getUsername());
+			fieldPassword.setText(connection.getPassword());
+		} else {
+			fieldClientId.setText(randomClientId());
+		}
 	}
 
 	@FXML
@@ -61,24 +74,24 @@ public class ConnectionPopup {
 		// Add connection
 		String hostname = comboProtocol.getValue() + fieldHost.getText() + ":" + fieldPort.getText();
 
-		workspace.getConnections().add(
-				new Connection(
-						fieldName.getText(),
-						hostname,
-						fieldClientId.getText(),
-						Integer.parseInt(fieldAlive.getText()),
-						switchClean.isSelected(),
-						switchReconnect.isSelected(),
-						fieldUsername.getText(),
-						fieldPassword.getText()
-				)
-		);
+		if(connection == null) {
+			connection = new Connection();
+			workspace.getConnections().add(connection);
+		}
 
-		// Save workspace
-		storageUtils.saveWorkspace(workspace);
+		connection.setName(fieldName.getText());
+		connection.setHostname(hostname);
+		connection.setClientId(fieldClientId.getText());
+		connection.setKeepAlive(Integer.parseInt(fieldAlive.getText()));
+		connection.setCleanSession(switchClean.isSelected());
+		connection.setAutoReconnect(switchReconnect.isSelected());
+		connection.setUsername(fieldUsername.getText());
+		connection.setPassword(fieldPassword.getText());
 
+		workspaceConfigurator.saveConfig("config.json", workspace);
+
+		homepageController.refreshConnections();
 		Stage stage = (Stage) buttonAdd.getScene().getWindow();
-		zapitController.refreshConnections();
 		stage.close();
 	}
 
