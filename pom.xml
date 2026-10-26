@@ -10,8 +10,12 @@
 	<name>ZapIt</name>
 
 	<properties>
+		<maven.compiler.release>27</maven.compiler.release>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<javafx.version>21.0.4</javafx.version>
+
+		<!-- Versions -->
+		<javafx.version>27</javafx.version>
+		<org.projectlombok.version>1.18.48</org.projectlombok.version>
 	</properties>
 
 	<repositories>
@@ -26,13 +30,20 @@
 		<dependency>
 			<groupId>tk.thesuperlab</groupId>
 			<artifactId>nitron</artifactId>
-			<version>1.0</version>
+			<version>1.0.1</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.eclipse.paho</groupId>
 			<artifactId>org.eclipse.paho.client.mqttv3</artifactId>
 			<version>1.2.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${org.projectlombok.version}</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<!-- AtlantaFX -->
@@ -160,8 +171,13 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.11.0</version>
 				<configuration>
-					<source>21</source>
-					<target>21</target>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>${org.projectlombok.version}</version>
+						</path>
+					</annotationProcessorPaths>
 				</configuration>
 			</plugin>
 

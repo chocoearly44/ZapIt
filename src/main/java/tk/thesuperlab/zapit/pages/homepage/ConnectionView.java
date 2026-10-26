@@ -71,8 +71,8 @@ public class ConnectionView implements Initializable {
 			String password = connection.getPassword();
 
 			if(!username.isEmpty() && !password.isEmpty()) {
-				options.setUserName(connection.getUsername());
-				options.setPassword(connection.getPassword().toCharArray());
+				options.setUserName("admin");
+				options.setPassword("Jurij.2005_".toCharArray());
 			}
 
 			mqttClient.connect(options);
@@ -247,7 +247,11 @@ public class ConnectionView implements Initializable {
 		content.add(textArea, 0, 1);
 
 		alert.getDialogPane().setExpandableContent(content);
-		alert.initOwner(labelName.getScene().getWindow());
+
+		if(labelName != null && labelName.getScene() != null) {
+			alert.initOwner(labelName.getScene().getWindow());
+		}
+
 		alert.show();
 	}
 }

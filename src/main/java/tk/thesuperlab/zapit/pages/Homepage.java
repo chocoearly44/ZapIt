@@ -83,7 +83,7 @@ public class Homepage {
 
 		activeConnections.add(connection);
 		ConnectionView connectionController = new ConnectionView(connection, stackPane);
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("homepage/connection-view.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("./homepage/connection-view.fxml"));
 		fxmlLoader.setControllerFactory(controllerClass -> connectionController);
 
 		Tab tab = new Tab(connection.getName());
